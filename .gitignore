@@ -12,7 +12,7 @@
 *.bbl
 
 # PDF output file
-*.pdf
+%*.pdf
 
 # DVI file
 *.dvi

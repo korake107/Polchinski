@@ -19,6 +19,7 @@
 \usepackage{ascmac}       % itemboxなどの囲み枠
 \usepackage{amsmath}
 \usepackage{amssymb}      % 数学記号 (\becauseなど)
+\usepackage{lastnum}
 \numberwithin{equation}{section}
 % --- その他 ---
 \parindent = 0pt % 全体の段落開始時のインデントをなくす
@@ -100,9 +101,394 @@
 }{lem}
 \begin{document}
 
-\title{テスト文書}
-\author{一ノ瀬}
+\title{Polchinskiのノート}
+\author{小武}
 \date{\today}
 \maketitle
+\section{A first look at string}
+\subsection{The open string spectrum}
+ここでは、開弦のスペクトルを光円錐ゲージを用いて考察する。
+光円錐ゲージを用いることによって、Diff$\times$Weyl対称性を固定することができる。
+まず光円錐座標を定義する。
+\begin{mydef}{光円錐座標}{light cone coordinates}
+    D次元座標から、光円錐座標を次のように定義する。
+\begin{align}
+    x^\pm = \frac{1}{\sqrt{2}}(x^0 \pm x^{D-1})
+\end{align}
+\end{mydef}
+この計量を使って、光円錐座標における計量を求めると次のようになる。
+\begin{align}
+    &a^\mu b_\mu=-a^+ b^--a^-b^+ + a^i b^i\\
+    &a_+=-a^-,  \ a_-=-a^+, \ a_i=a^i
+\end{align}
+世界面の各点$\tau$が時空座標$x^+$に等しくなるように設定する。これにより$x^+$を、$p^-$はエネルギーの
+表す。
+\\\\
+ポリヤコフ作用の冗長性を固定するためにゲージを選択する。
+それにより次の3つの関係が成り立っていることに注意する。
+\begin{align}
+    X^+=\tau,\label{gauge cond. 1}\\
+    \partial_\sigma h_{\sigma\sigma}=0,\label{gauge cond. 2}\\
+    \det h_{ab}=-1.\label{gauge cond. 3}
+\end{align}
+この選び方が可能なことの根拠を確認しておこう。$\tau$は最初の式のようにとっているので、$f=h_{\sigma\sigma}(-\det h_{ab})^{-1/2}$とすると
+次の式が成り立つ。
+\begin{align}
+    f'd\sigma'=\qty(\pdv{\sigma}{\sigma'})^2h_{\sigma\sigma}\qty(\pdv{\sigma}{\sigma'})^{-1}(\sqrt{-\det h_{ab}})^{-1}\qty(\pdv{\sigma}{\sigma'})^{-1}d\sigma=fd\sigma
+\end{align}
+\begin{note}
+計量はヤコビ行列$J$を用いて$h'=J^ThJ$と変換される。
+今、$\tau$の取り方からヤコビ行列は次のようになっている。
+\begin{align}
+    J=\mqty(\pdv{\tau}{\tau'} & \pdv{\tau}{\sigma'} \\ \pdv{\sigma}{\tau'} & \pdv{\sigma'}{\sigma})=\mqty(1 & 0 \\ \pdv{\sigma}{\tau'} & \pdv{\sigma}{\sigma'})
+\end{align}
+これにより変換性が決まるのである。
+\end{note}
+この性質を用いて、不変な長さを$fd\sigma=dl$と定義すると
+$\sigma$を$\int dl$に比例するようにパラメータを選ぶことができる。
+この時$f=dl/d\sigma$は$\sigma$によらないが$\tau$には依存することに注意する。
+これはつまり、全体の長さの$\int dl$が$\tau$に依存することを意味している。
+最後に、ワイル変換を行うことにより、$\det h_{ab}=-1$が保たれる。
+$f$はワイル変換の下で不変であるため、$\partial_\sigma h_{\sigma\sigma}=0$となる。
+これで全ての条件が同時に成り立つことが確認できた。
+\\
+\eqref{gauge cond. 3}の条件を$h_{\sigma\sigma}$について解く。
+$h_{\sigma\sigma}$は\eqref{gauge cond. 2}から$\sigma$に依存しないので、計量の中で独立なものは$h_{\sigma\sigma}(\tau),h_{\sigma\tau}$のみである。
+よって、逆行列は次のように書くことができる。
+\begin{align}
+    h^{ab}=\mqty(h^{\tau\tau}&h^{\tau\sigma}\\h^{\sigma\tau} & h^{\sigma\sigma})=\frac{1}{\det h_{ab}}\mqty(h_{\sigma\sigma} & -h_{\sigma\tau} \\ -h_{\sigma\tau} & h_{\tau\tau})=\mqty(-h_{\sigma\sigma} & h_{\sigma\tau} \\ h_{\sigma\tau} & h_{\sigma\sigma}^{-1}(1-h_{\sigma\tau}^2))
+\end{align}
+$(2,2)$成分は全体の行列式が$-1$になるように決めた。
+よって光円錐ゲージにおけるポリヤコフ作用は次のように書くことができる。
+\begin{mythm}{光円錐ゲージにおけるポリヤコフ作用}{Polyakov action in light cone gauge
+    }
+    光円錐ゲージにおけるポリヤコフ作用は次のように書くことができる。
+    \begin{align}
+L = -\frac{1}{4\pi\alpha'} \int_0^{\ell} d\sigma \,
+\Big[ &h_{\sigma\sigma} \left( 2\partial_\tau x^- - \partial_\tau X^i \partial_\tau X^i \right) \nonumber \\
+&- 2h_{\sigma\tau} \left( \partial_\sigma Y^- - \partial_\tau X^i \partial_\sigma X^i \right)
++ h_{\sigma\sigma}^{-1} \left( 1 - h_{\tau\sigma}^2 \right) \partial_\sigma X^i \partial_\sigma X^i \Big] \label{light gauge poly action} 
+\end{align}
+ただし、$x^-,Y^-$は次のようにかける。
+\begin{align}
+x^-(\tau) &= \frac{1}{\ell} \int_0^{\ell} d\sigma\, X^-(\tau,\sigma)  \\
+Y^-(\tau,\sigma) &= X^-(\tau,\sigma) - x^-(\tau) 
+\end{align}
+\end{mythm}
+
+\begin{note}
+    この書き換えの仕方は次のようである。まず、ポリヤコフラグランジアンは次のように書くことができる。
+    \begin{align}
+        L=-\frac{1}{4\pi\alpha'}\int d\sigma \sqrt{-h}h^{ab}\partial_a X^\mu \partial_b X_\mu
+    \end{align}
+    ここで、$\det h_{ab}=-1$を用いると、次のように書くことができる。
+    \begin{align}
+        L=&-\frac{1}{4\pi\alpha'}\int d\sigma h^{\tau\tau}\partial_\tau X^\mu \partial_\tau X_\mu + 2h^{\tau\sigma}\partial_\tau X^\mu \partial_\sigma X_\mu + h^{\sigma\sigma}\partial_\sigma X^\mu \partial_\sigma X_\mu\notag\\
+        =&-\frac{1}{4\pi\alpha'}\int d\sigma\Bigg[-h_{\sigma\sigma}\qty(-2\partial_\tau X^-\partial_\tau X^+ + \partial_\tau X^i \partial_\tau X^i) + h_{\sigma\tau}\qty(-\partial_\sigma X^- \partial_\tau X^+ + \partial_\tau X^i \partial_\sigma X^i) \notag\\
+        & \hspace{2em}+h_{\tau\sigma}\qty(-\partial_\tau X^- \partial_\sigma X^+ + \partial_\sigma X^i \partial_\tau X^i) + h_{\sigma\sigma}^{-1}\qty(1-h_{\sigma\tau}^2)\qty(-2\partial_\sigma X^- \partial_\sigma X^+ + \partial_\sigma X^i \partial_\sigma X^i)\Bigg]\notag\\
+        =&-\frac{1}{4\pi\alpha'}\int d\sigma\Bigg[-h_{\sigma\sigma}\qty(-2\partial_\tau X^-+ \partial_\tau X^i \partial_\tau X^i) + h_{\sigma\tau}\qty(-2\partial_\sigma X^-  + \partial_\tau X^i \partial_\sigma X^i) \notag\\
+        &\ \ \ +h_{\tau\sigma}\qty( \partial_\sigma X^i \partial_\tau X^i) + h_{\sigma\sigma}^{-1}\qty(1-h_{\sigma\tau}^2) \partial_\sigma X^i \partial_\sigma X^i\Bigg]\notag
+    \end{align}
+ここで、$x^-(\tau),Y^-(\tau,\sigma)$を導入する.
+$X^-=x^-(\tau)+Y^-(\tau,\sigma)$を代入すると、次の世に書き換えることができる。
+\begin{align}   
+    L=-\frac{1}{4\pi\alpha'}\int d\sigma\Bigg[-h_{\sigma\sigma}\qty(-2\partial_\tau x^-+ \partial_\tau X^i \partial_\tau X^i) + h_{\sigma\tau}\qty(-2\partial_\sigma Y^-  + \partial_\tau X^i \partial_\sigma X^i) + h_{\tau\sigma}\qty( \partial_\sigma X^i \partial_\tau X^i) + h_{\sigma\sigma}^{-1}\qty(1-h_{\sigma\tau}^2) \partial_\sigma X^i \partial_\sigma X^i\Bigg]\notag
+\end{align}
+これにより、\eqref{light gauge poly action}が得られる。
+\end{note}
+$Y^-$に関して、時間微分項がないので、$Y^-$は非動的な変数である。
+その代わりラグランジュの未定乗数のように扱うことができて、つまり$\partial_\sigma^2 h_{\sigma\tau}=0$で
+あることがわかる。(変文による微分がつき、それらを部分積分すれば良い。)
+\\
+ここで、作用の停留条件から出てくるノイマン境界条件を次のように書き直すことができる。
+
+\begin{align}
+    h_{\tau\sigma}\partial_\tau X^\mu-h_{\tau\tau}\partial_\sigma X^\mu = 0 \quad \text{(at the boundary)}
+\end{align}
+ここで、$\mu=+$を選ぶと
+\begin{align}
+    h_{\tau\sigma}=0\quad \text{(at the boundary)}
+\end{align}
+を得ることができる。2階微分が0であったことを踏まると、$h_{\tau\sigma}$はたかだか2次式であり、境界条件から定数項が0で、$\sigma=l$でも同様から1次の係数も0である。
+$\mu=i$を選ぶと、
+\begin{align}
+    \partial_\tau X^i = 0 \quad \text{(at the boundary)}\label{light cone Neumann}
+\end{align}
+を得る。
+これらを踏まえるとラグランジアンは次のように書き直せる。
+\begin{align}
+    L=-\frac{l}{2\pi \alpha'}h_{\sigma\sigma}\partial_\tau x^-+\frac{1}{4\pi\alpha'}\int d\sigma h_{\sigma\sigma} \partial_\tau X^i \partial_\tau X^i-h_{\sigma\sigma}^{-1}  \partial_\sigma X^i \partial_\sigma X^i
+\end{align}
+\begin{note}
+    \eqref{light gauge poly action}の1項目は$\sigma$依存性がないため積分し、他に2項目と5項目が残った。
+\end{note}
+$x^-$に共役な運動量は
+\begin{align}
+    p_{-} = -p^+=\frac{\partial L}{\partial (\partial_\tau x^-)} = -\frac{l}{2\pi \alpha'} h_{\sigma\sigma}
+\end{align}
+同様に、$X^i$に共役な運動量密度は
+\begin{align}
+    \Pi^i = \frac{\partial L}{\partial (\partial_\tau X^i)} = \frac{1}{2\pi\alpha'} h_{\sigma\sigma} \partial_\tau X^i
+    =\frac{p^+}{l}\partial_\tau X^i
+\end{align}
+とかけることがわかる。
+\\
+これらを用いてハミルトニアンは
+\begin{align}
+    H=&p_-\partial_\tau x^- + \int d\sigma (\Pi_i \partial_\tau X^i )- L\notag\\
+=&\int d\sigma  (\Pi_i \partial_\tau X^i - \frac{1}{4\pi \alpha'}\qty{ h_{\sigma\sigma}\partial_\tau X^i \partial_\tau X^i-h_{\sigma\sigma}^{-1}  \partial_\sigma X^i \partial_\sigma X^i})\notag\\
+=&\int d\sigma  \qty(\Pi^i\frac{l}{p^+}\Pi^i-\frac{1}{4\pi \alpha'} \qty{ \frac{p^+2\pi\alpha'}{l}\frac{l^2}{(p^+)^2}\Pi^i\Pi^i-\frac{l}{2\pi\alpha'p^+}  \partial_\sigma X^i \partial_\sigma X^i})\notag\\
+=&\frac{\ell}{4\pi\alpha' p^+} \int_0^{\ell} d\sigma \left( 2\pi\alpha' \Pi^i \Pi^i + \frac{1}{2\pi\alpha'} \partial_\sigma X^i \partial_\sigma X^i \right)\label{light cone hamiltonian}
+\end{align}
+これは$D-2$自由場$X^i$に対するハミルトニアンと同じである。ここでは$p^+$が保存量(時間によらない)である。
+ハミルトン方程式より運動方程式は次のようになる。
+\begin{align}
+    \partial_\tau x^-=\frac{\delta H}{\delta p_-}, \quad\partial_\tau p^+ = -\frac{\delta H}{\delta x^-}=0, \quad
+    \partial_\tau X^i = \frac{\delta H}{\delta \Pi^i} = \frac{l}{ p^+} \Pi^i, \quad
+    \partial_\tau \Pi^i = -\frac{\delta H}{\delta X^i} = \frac{l}{4\pi^2\alpha'^2 p^+} \partial_\sigma^2 X^i
+\end{align}
+
+これにより波動方程式が成り立つことがわかる。
+\begin{align}
+    \partial_\tau^2 X^i=\frac{l}{p^+}\partial_\tau \Pi^i =  \frac{l^2}{(2\pi\alpha' p^+)^2} \partial_\sigma^2 X^i=c^2\partial_\sigma^2 X^i
+\end{align}
+ここで$c=\frac{l}{2\pi\alpha' p^+}$と置いている。
+相互作用は光円錐ゲージでは扱わないので、$l$を$p^+$に比例するように座標系をとれば、$c=1$とできる。
+ここで$p^+$は長さに比例した量であり、保存量であったことを考えると$l$は時間によらず一定である。
+\begin{note}
+    $c = 1$ と選ぶことは、世界面の計量を平坦なミンコフスキー計量に決めることと同じです。
+\end{note}
+横座標は自由場として扱われ、波動方程式に従うことから通常の展開を行うことができる。
+\eqref{light cone Neumann}式を満たすことに気をつけて次のように展開を行う。
+\begin{align}
+    X^i(\tau,\sigma) = x^i +\frac{p^i}{p^+}\tau +i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{1}{n} \alpha_n^i e^{-in\pi c \tau/l} \cos\frac{n\pi\sigma}{l}\label{fourie expansion}
+\end{align}
+$X^i$は実であるので、
+\begin{align}
+    \alpha_{-n}^i = (\alpha_n^i)^*
+\end{align}
+が成り立つ。また、重心と全運動量として次を定義する。
+\begin{align}
+    x^i=&\frac{1}{l}\int_0^ld \sigma \ X^i(\tau,\sigma)\\
+    p^i=&\frac{1}{l}\int_0^ld \sigma \ \Pi^i=\frac{p^+}{l}\int d\sigma \ \partial_\tau X^i
+\end{align}
+\\
+量子化をするため、同時刻正隼交換関係をかす。
+\begin{align}
+    [x^-,p^+]=i\eta^{-+}=&-i\\
+    [X^i(\sigma),\Pi^j(\sigma')]=&i\delta^{ij}\delta(\sigma-\sigma')
+\end{align}
+また、他の変数に対する交換子は0になる。
+これはフーリエ成分に対して次の条件を課していることになる。
+\begin{align}
+    [x^i, p^j] =& i\delta^{ij}\\
+    [\alpha_m^i, \alpha_n^j] =& m \delta^{ij} \delta_{m+n,0}\label{anihilation commutator}
+\end{align}
+\begin{note}
+    ここではこの交換関係の導出は行わないが、確認としてフーリエ成分に対する交換関係が正しいことを示す。
+    \begin{lalign}
+    [X^i(\sigma), \Pi^j(\sigma')]
+&= \Big[ x^i + \frac{p^i}{p^+}\tau
+   + i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{1}{n}
+     \alpha_n^i e^{-in\pi c \tau/l} \cos\frac{n\pi\sigma}{l}, \\
+&\qquad \frac{p^+}{l}\,\partial_\tau \qty( \frac{p^j}{p^+}\tau
+   + i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{1}{n}
+     \alpha_n^j e^{-in\pi c \tau/l} \cos\frac{n\pi\sigma'}{l} ) \Big] \\
+&= \Big[ x^i + \frac{p^i}{p^+}\tau
+   + i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{1}{n}
+     \alpha_n^i e^{-in\pi c \tau/l} \cos\frac{n\pi\sigma}{l}, \\
+&\qquad \frac{p^+}{l} \qty( \frac{p^j}{p^+}
+   + i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{-in\pi c}{nl}
+     \alpha_n^j e^{-in\pi c \tau/l} \cos\frac{n\pi\sigma'}{l} ) \Big] \\
+&= [x^i, p^j/l] + \sum_{n\neq 0} \frac{1}{n} \frac{p^+}{l} i(2\alpha')^\frac{-in\pi c}{l} [\alpha_n^i, \alpha_{-n}^j] \cos\frac{n\pi\sigma}{l} \cos\frac{n\pi\sigma'}{l} \\
+&= [x^i, p^j/l] + \sum_{n\neq 0} \frac{1}{n} \frac{p^+}{l} i(2\alpha')\frac{-in\pi c}{l} n \delta^{ij} \delta_{n+(-n),0} \cos\frac{n\pi\sigma}{l} \cos\frac{n\pi\sigma'}{l} \\
+&= [x^i, p^j/l] + \sum_{n>0} \frac{2p^+}{l} (2\alpha') \frac{\pi c}{l} \delta^{ij} \cos\frac{n\pi\sigma}{l} \cos\frac{n\pi\sigma'}{l} \\
+&=  \delta^{ij} \delta(\sigma-\sigma')
+\end{lalign}
+最後の行は間 $[0,\ell]$ 上のノイマン境界条件の固有関数 $\{1, \cos(n\pi\sigma/\ell)\}$ の完全性関係
+
+
+$$\frac{1}{\ell} + \frac{2}{\ell}\sum_{n=1}^{\infty}\cos\frac{n\pi\sigma}{\ell}\cos\frac{n\pi\sigma'}{\ell} = \delta(\sigma - \sigma') \qquad (0 \le \sigma,\sigma' \le \ell)$$を用いた。
+\end{note}
+さらに各$m,i$に対して、調和振動子代数を満たすように再規格化を行う。
+\begin{align}
+    \alpha_n^i\sim m^{1/2}a, \ \ \alpha_{-n}^i\sim m^{1/2}a^\dagger
+\end{align}
+\\
+次に状態との対応を見る。状態$\ket{0;k},k=(k^+,k^i)$は下降演算子が作用した時に消滅する用に定義される。
+また重心運動量の固有状態でもあり、次の式を満たすものである。
+\begin{align}
+    &p^+ \ket{0;k} = k^+ \ket{0;k}  \quad
+ p^i \ket{0;k} = k^i \ket{0;k} \\
+&\alpha_m^i \ket{0;k} = 0  \ \ \ \quad( m > 0) 
+\end{align}
+一般の状態は$\ket{0;k}$に上昇演算子を作用させることにより定義する。
+\begin{align}
+    \ket{N;k} = \qty[ \prod_{i=2}^{D-1} \prod_{n=1}^{\infty}
+  \frac{(\alpha_{-n}^i)^{N_{in}}}{(n^{N_{in}} N_{in}!)^{1/2}} ] \ket{0;k}
+\end{align}
+独立な状態が重心$k^+,k^i$と占有数$N_{in}$によって指定される。重心運動量が点粒子の自由度の程度を表していることが窺える。一方で、調和振動子は無限の内部自由度を持っている。
+\\
+\eqref{fourie expansion}式を\eqref{light cone hamiltonian}式に代入することにより、ハミルトニアンは調和振動子の形に書き直される。
+\begin{align}
+    H=\frac{p^ip^i}{2p^+}+\frac{1}{2p^+ \alpha'} \sum_{n\neq 0} (\alpha_{-n}^i \alpha_n^i+A)
+\end{align}
+となる。
+\begin{note}
+    具体的な計算を行う。
+\begin{lalign}
+H &= \frac{l}{4\pi\alpha' p^+} \int_0^{l} d\sigma
+  \qty( 2\pi\alpha' \Pi^i \Pi^i
+  + \frac{1}{2\pi\alpha'} \partial_\sigma X^i \partial_\sigma X^i ) \\
+&= \frac{l}{4\pi\alpha' p^+} \int_0^{l} d\sigma \,
+  \Bigg[ 2\pi\alpha' \qty(\frac{p^+}{l})^2 \nonumber \\
+&\qquad \times \qty( \frac{p^i}{p^+}
+  + i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{1}{n}
+    \alpha_n^i\, \partial_\tau e^{-in\pi c \tau/l}
+    \cos\frac{n\pi\sigma}{l} )^2
+  + \frac{1}{2\pi\alpha'} \qty[ \partial_\sigma \qty( x_0^i + \frac{p^i}{p^+}\tau
+   + i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{1}{n}
+   \alpha_n^i e^{-in\pi c \tau/l} \cos\frac{n\pi\sigma}{l} ) ]^2 \Bigg]\\
+   &=\frac{l}{4\pi\alpha' p^+} \int_0^{l} d\sigma \,
+  \Bigg[ 2\pi\alpha' \qty(\frac{p^+}{l})^2  \qty( \qty(\frac{p^i}{p^+})^2
+  + \qty(i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{1}{n}
+    \alpha_n^i\, \frac{-in\pi c}{l} e^{-in\pi c \tau/l}
+    \cos\frac{n\pi\sigma}{l} )^2)\\
+  &\quad + \frac{1}{2\pi\alpha'}   \qty( i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{1}{n}
+   \alpha_n^i e^{-in\pi c \tau/l} \frac{n\pi}{l}\sin\frac{n\pi\sigma}{l} )^2 \Bigg]\\
+   &=\frac{p^ip^i}{2p^+}+\frac{l}{4\pi^2\alpha' p^+}\int _0^{l} d\sigma \qty(\frac{\pi}{l})^2\frac{1}{2}(\alpha^i_n\alpha^i_{-n}+\alpha^i_{-n}\alpha^i_n)
+\end{lalign}
+ここで昇降演算子の交換関係を用いると次のように書き直せる。
+\begin{lalign}
+       H=\frac{p^ip^i}{2p^+}+\frac{1}{4\alpha' p^+} \sum_{n=1}^{\infty} (2\alpha_{-n}^i \alpha_n^i+(D-2)n)
+\end{lalign}
+これはある定数$A$を除き、\eqref{light cone hamiltonian}式の形になっている。
+\end{note}
+次にこの定数$A$の表式を決めよう。
+光円錐ゲージとは、ローレンツ対称性が見えにくいゲージ固定である。
+なので、ローレンツ変換の生成子$M^{\mu\nu}$を見つっけることが必要であり、$p^{\mu}$などと正しい交換関係を満たすか確かめる必要がある。
+この結果$A=-1$だとわかり、それは時空次元が$D=26$の時であるときのみ成り立つことが確かめられる。
+\\
+これの説明を試みてみよう。
+$A,D$が間違った値を取る時、ローレンツ対称性が破れることになることの説明も試みてみる。
+\\
+まず、ハミルトニアンに含まれる交換子由来の定数項は、各調和振動子のモードのゼロ点エネルギー$\frac{1}{2}\omega$をボソン場$X^\mu$に対して足し合わせたものである。
+言い換えると、自然な演算子の順序はいつも平均をとったもの $\tfrac12\omega(aa^{\dagger} + a^\dagger a)$ になり、これは $\omega(a^\dagger a + \tfrac12)$ と同じある。
+ハミルトニアンの中で、$A$は次のような表式をとる。
+\begin{align}
+    A=\frac{D-2}{2}\sum_{n=1}^{\infty} n
+\end{align}
+$D-2$とは横方向に足し上げたことに由来する。この表式を見ると、ゼロ点エネルギーの総和は発散することがわかる。理論を正則化し、そのうえで繰り込みの際にローレンツ不変性を保つよう注意深く扱うことで、この和を評価できます。通常は、リーマンゼータ関数の正則化を用いて
+\begin{align}
+    \sum_{n=1}^{\infty} n = \zeta(-1) = -\frac{1}{12}
+\end{align}
+と扱う。
+\begin{note}
+    高い振動数のモードを抑える因子 $e^{-\epsilon n}$ を入れて和をとると、等比級数の微分から
+
+
+$$\sum_{n=1}^\infty n\,e^{-\epsilon n} = \frac{e^{-\epsilon}}{(1-e^{-\epsilon})^2} = \frac{1}{4\sinh^2(\epsilon/2)}$$
+
+となり、$\epsilon \to 0$ で展開すると、$\sinh \frac{\varepsilon}{2}=\frac{\epsilon}{2} + O(\epsilon^3)$より
+$$\sum_{n=1}^\infty n\,e^{-\epsilon n} = \frac{1}{4}\cdot \frac{1}{(\frac{\varepsilon}{2})^2}\qty(1-\frac{\varepsilon^2}{3!2^2})+\cdots=\frac{1}{\epsilon^2} - \frac{1}{12} + O(\epsilon^2)$$
+
+です。発散する部分 $1/\epsilon^2$ と、有限で $\epsilon$ によらない部分 $-1/12$ にきれいに分かれます。
+\end{note}これにより
+\begin{align}
+    A = \frac{D-2}{2} \cdot \left(-\frac{1}{12}\right) = -\frac{D-2}{24}
+\end{align}
+となる。光円錐ゲージでローレンツ対称性を保つためには、$A=-1$である必要があり、これにより$D-2=24$、すなわち$D=26$が導かれる。
+この有限のエネルギーはカシミアエネルギーと呼ばれ、弦が有限の長さを持つことによって生じる。
+\\
+\\
+質量殻条件 $p^\mu p_\mu = -m^2$ を光円錐座標で書くと
+
+
+$$-2p^+p^- + p^ip^i = -m^2 \quad\Rightarrow\quad m^2 = 2p^+p^- - p^ip^i$$
+
+で、$p^- = H$ を代入すると
+\begin{align}
+    m^2=2p^+H - p^ip^i=\frac{1}{\alpha'}\qty(N+\frac{2-D}{24})\label{light cone mass shell}
+\end{align}
+ここで個数演算子を次のように定義すると
+\begin{align}
+    N_{in} = a^{i\dagger}_n a^i_n = \frac{1}{n}\alpha^i_{-n}\alpha^i_n
+\end{align}
+$N$次のように定義される。
+\begin{align}
+    N = \sum_{i=2}^{D-1}\sum_{n=1}^{\infty} nN_{in} = \sum_{n=1}^{\infty}n a^{i\dagger}_n a^i_n = \sum_{n=1}^{\infty} \alpha^i_{-n}\alpha^i_n
+\end{align}
+ここでいくつかの軽い弦の状態を見てみよう。
+もっとも軽い状態は
+\begin{align}
+    \ket{0;k}\ , \ m^2 = -\frac{2-D}{24\alpha'}
+\end{align}
+$D>0$の時は質量の2乗が負であり、これはタキオンであることを意味する。
+場の理論を考えてみると、スカラー場のポテンシャルエネルギーは$\frac{1}{2}m^2\phi^2$であり、
+質量2乗が負であるとは、弦がない状態、所謂真空状態が不安定であることを意味する。
+これは実は重大な問題であり、ボソン弦の中に安定な真空状態があるのかどうかは知られていない。
+\\
+次にもっとも低い励起状態に注目する。その状態と質量は次のようにかける。
+\begin{align}
+    \ket{1;k} = \alpha^{i\dagger}_1 \ket{0;k}\ , \ m^2 =  \frac{26-D}{24\alpha'}\label{light cone massless}
+\end{align}
+ローレンツ不変性は下記で示すようにある特別な値を取ることが要求される。
+スピン統計はmassless状態かmassive状態かによって異なる。massive状態では座標系を静止系に持っていくことより$p^\mu=(m,0,0,0)$となり、スピンの表現は回転群$SO(D-1)$の表現として分類される。\\
+一方、massless状態では静止系に持っていくことができない。$p^\mu=(E,E,0,\dots,0)$のように選ぶと
+$SO(D-2)$の群に対して状態は不変に保たれる。つまり、内部状態はより小さい回転群$SO(D-2)$の表現として分類される。\\
+massive粒子はスピン$j$によってつまり$SO(3)$の表現として分類され$2j+1$個の状態を持つ。
+massless粒子はヘリシティ$h$によって分類され、それは$SO(2)$の生成子の固有値となっている。
+したがって、ローレンツ不変性だけなら状態は1つであるが、CPT対称性は $\lambda$ を $-\lambda$ に移すので、$\lambda \neq 0$ の場合には2つの状態が必要になる。
+\\
+$D$次元では、massiveなベクトル粒子は$D-1$個の状態を持ち、一方でmasslessなベクトル粒子は$D-2$個の状態を持つ。ナイーブに、第一励起状態でmasslessなベクトル粒子$\alpha_{-1}^i \ket{0;k}$が$D-2$個の状態を持つための条件を考えてみる。
+\eqref{light cone massless}式から質量がゼロとなる条件は
+\begin{align}
+  D = 26\ \quad A=-1
+\end{align}
+である。
+これは注目するべき結果であり、質量スペクトラムがローレンツ不変性を保つのは時空の次元が$D=26$のときのみであることを表している。
+実は、古典的な理論ではいかなる時空次元でもローレンツ不変性は保たれる。しかし、そこにはアノマリーがある。
+そのアノマリーの消去条件、つまり量子論においても同じように保たれるためには時空次元が26次元であることが必要なのである。
+\begin{mythm}{光円錐量子化におけるローレンツ不変性の条件}{light cone quantization}
+    光円錐量子化において、ローレンツ不変性を保つため(アノマリーを消去するため)には時空次元が$D=26$である必要がある。
+\end{mythm}
+スピンについてさらなる考察を与えておく。
+光円錐量子化は2つの方向を特別扱いし、横方向に作用する $SO(D-2)$ だけを明白な形で残す。
+横方向に対するスピン生成子は次のようにかける。
+\begin{align}
+    S^{ij} = -i \sum_{n=1}^{\infty} \frac{1}{n} \left( \alpha^i_{-n} \alpha^j_n - \alpha^j_{-n} \alpha^i_n \right)
+\end{align}
+\begin{note}
+    この表式がどのようにして出てきたのか確認しておく。
+    ローレンツ生成子は弦の座標と共役運動量を用いて次のようにかける。
+    \begin{align}
+        M^{\mu\nu} = \int_0^\pi d\sigma \left( X^\mu P^\nu - X^\nu P^\mu \right)
+    \end{align}
+    これにフーリエ変換した式を代入すると、次のように変形することができる。
+    \begin{align}
+        M^{\mu\nu}=x^ip^j - x^jp^i+\int X^i_{\text{osc}}\Pi^j_{\text{osc}} -(i \leftrightarrow j)= x^ip^j - x^jp^i+\frac{i}{2}\sum_{n\neq0}\frac{1}{n}\left(\alpha^i_n\alpha^j_{-n} + \alpha^i_n\alpha^j_n e^{-2i\pi nc\tau/\ell}- (i \leftrightarrow j)\right)
+    \end{align}
+   反対称化により、$\alpha^i_n\alpha^j_n e^{-2i\pi nc\tau/\ell}$の項は消え、最終的に
+   \begin{align}
+       M^{ij} = x^i p^j - x^j p^i + \frac{i}{2} \sum_{n\neq0} \frac{1}{n} \left( \alpha^i_n \alpha^j_{-n} - \alpha^j_n \alpha^i_{-n} \right)
+   \end{align}
+   となる。これが光円錐量子化における横方向のスピン生成子の由来である。
+\end{note}
+    $i,j$に関して反対称であり、ローレンツ不変性はゼロ点の定数の寄与は残らない。
+   massiveな粒子において明白になるのは$SO(D-1)$スピン対象群の部分群$SO(D-2)$だけでは光円錐量子化において役にたつ。
+   例えば、$(D-1)$次元のベクトルは$SO(D-2)$の表現で分解すると、1つのスカラーと$D-2$個のベクトルに分かれる。
+   $$\mathbf v = (v^1, 0, \dots, 0) + (0, v^2, \dots, v^{D-1}) $$
+   \\
+   massiveな高次の弦の励起状態として、$SO(D-1)$の表現は完全体になる。
+   \\
+   レベル$N$においては、例えばスピン成分$S^{23}$の最大値はN
+   であり、したがって
+
+\begin{align}
+S^{23} \le 1 + \alpha' m^2 =N\quad \text{(\eqref{light cone mass shell})}
+\end{align}
+
+です。この不等式の傾きはレッジェ・スロープとして知られています。中間子の共鳴状態は、$\alpha' \sim (1\ \text{GeV})^{-2}$ としてこの形の線形関係に従います。これをはじめとするいくつかの理由から、弦理論はもともと1970年に強い相互作用の理論として提案されました。しかし数年のうちに、$SU(3)$ ゲージ理論である QCD が正しい理論であることがわかり、弦のような振る舞いは特定の極限でしか現れないことが明らかになりました。\\
+今では、弦は重力と量子力学を統合する素粒子物理学の理論だと考えられている。
 
 \end{document}

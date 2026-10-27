@@ -1,0 +1,42 @@
+%% lastnum.sty
+%% 式番号を最後の行だけに付ける環境 lalign, lalignat を提供するパッケージ
+%% 通常の align, alignat などの動作は変更しない
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lastnum}[2026/10/26 v1.1 Number only the last line]
+
+\RequirePackage{amsmath}
+\RequirePackage{etoolbox}
+
+\newif\iflastnum@active  \lastnum@activefalse
+\newif\iflastnum@keep    \lastnum@keepfalse
+
+% この行にも番号を付ける(lalign 内で使用)
+\newcommand{\numberthis}{\global\lastnum@keeptrue}
+
+% 改行 \\ の直前で、その行の自動番号を消す
+\def\lastnum@cr{%
+  \iflastnum@keep
+    \global\lastnum@keepfalse
+  \else
+    \global\@eqnswfalse
+  \fi
+  \math@cr}
+
+% lalign 系の環境の中でだけ \\ を差し替える
+% (最後の行は \\ ではなく \end{...} で閉じられるので番号が残る)
+\patchcmd{\align@}
+  {\let\math@cr@@@\math@cr@@@align}
+  {\let\math@cr@@@\math@cr@@@align
+   \iflastnum@active \let\\\lastnum@cr \fi}
+  {}
+  {\PackageWarning{lastnum}{Failed to patch \string\align@}}
+
+% 新しい環境
+\newenvironment{lalign}
+  {\lastnum@activetrue\align}
+  {\endalign}
+\newenvironment{lalignat}
+  {\lastnum@activetrue\alignat}
+  {\endalignat}
+
+\endinput
