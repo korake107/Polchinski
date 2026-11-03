@@ -19,3 +19,5 @@
 
 # VS Code settings folder
 .vscode/
+# ビルド時にリポジトリ名の PDF を自動コピーするため、元の test.pdf は追跡しない
+test.pdf
