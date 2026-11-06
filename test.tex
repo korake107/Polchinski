@@ -1147,7 +1147,7 @@ $z$がプライマリ場の時空点$z_i$に近づくときの特異的な振る
 \end{align}
 $h$の1次の寄与を考える。
 \begin{align}
-    -\pi \frac{\delta}{\delta h(\xi)}\ev{X}|_{h=0}=\ev{T(\xi)X}
+    -\pi \frac{\delta}{\delta h(\xi)}\ev{X}|_{h=0}=\ev{T(\xi)X}\label{h1order}
 \end{align}
 ここで大事なことは一般にワイル不変性はアノマリーを持ち、
 曲がった時空ではエネルギー$\cdot$ 運動量テンソルのトレースの期待値はゼロにはならないと言う事実である。
@@ -1175,13 +1175,39 @@ $$R = \partial_\mu\partial_\nu h^{\mu\nu} - \partial^2 h^\mu{}_\mu + O(h^2)$$
 \end{align}
 トレースアノマリーの一般に
 \begin{align}
-    \ev{T^{z\bar{z}}X}=-\frac{c}{3} \partial_z^2 h \ev{X}-4h\ev{T(\xi)X}
+    \ev{T^{z\bar{z}}X}=-\frac{c}{3} \partial_z^2 h \ev{X}-4h\ev{T(\xi)X}\label{trace anomaly}
 \end{align}
 また、共変微分$\nabla_{\mu}\epsilon_{\bar{z}}$を計算すると次のようになる。
 \begin{align}
-    \nabla_{\bar{z}}\epsilon_{\bar{z}}=\partial_{\bar{z}}\epsilon_{\bar{z}}-\Gamma^{\bar{z}}_{\ \bar{z}\bar{z}}\epsilon_{\bar{z}}=\partial_{\bar{z}}\epsilon_{\bar{z}}+\partial_{z}h\epsilon_{\bar{z}}\\
-    \nabla_z\epsilon_{\bar{z}}=\partial_{z}\epsilon_{\bar{z}}-\Gamma^{\bar{z}}_{\ z\bar{z}}\epsilon_{\bar{z}}=\partial_{z}\epsilon_{\bar{z}}-\partial_{z}h\epsilon_{\bar{z}}
+    \nabla_{\bar{z}}\epsilon_{\bar{z}}=\partial_{\bar{z}}\epsilon_{\bar{z}}-\Gamma^{\bar{z}}_{\ \bar{z}\bar{z}}\epsilon_{\bar{z}}=\partial_{\bar{z}}\epsilon_{\bar{z}}+\partial_{z}h\epsilon_{\bar{z}}\label{covariant derivative}\\
+    \nabla_z\epsilon_{\bar{z}}=\partial_{z}\epsilon_{\bar{z}}-\Gamma^{\bar{z}}_{\ z\bar{z}}\epsilon_{\bar{z}}=\partial_{z}\epsilon_{\bar{z}}-\partial_{z}h\epsilon_{\bar{z}}\label{covariant derivative2}
 \end{align}
+\eqref{trace anomaly}\eqref{covariant derivative}\eqref{covariant derivative2}式を用いて、ワード高橋恒等式に代入すると
+\begin{align}
+  \frac{1}{\pi} \int_{\Sigma} d^2\xi \bigg[ (\partial_{\bar{z}}\epsilon^z)\langle T(\xi)X \rangle &+ \{\epsilon^z\partial_z h - (\partial_z\epsilon^z)h\}(\xi)\langle T(\xi)X \rangle \\
+  &- \frac{c}{12}(\partial_z\epsilon^z)(\partial_z^2 h)(\xi)\langle X \rangle \bigg] + \langle \delta_\epsilon X \rangle + O(h^2) = 0
+\end{align}
+\begin{note}
+    \begin{align}
+            \frac{1}{2\pi}\int d^2\xi \ \sqrt{g} \ \nabla_{\bar{z}} \epsilon_{\bar{z}} \ev{T^{\bar{z}\bar{z}}X}+\frac{1}{2\pi}\int d^2\xi \ \sqrt{g} \ \nabla_{z} \epsilon_{\bar{z}} \ev{T^{z\bar{z}}X}+\sum_i \ev{\delta_{\epsilon} \phi_i(x_i) X} = 0
+    \end{align}
+    に代入すればよい。
+\end{note}
+\begin{align}
+  \delta_\epsilon T &\equiv \epsilon^z \partial_z T + 2(\partial_z \epsilon^z)T + \frac{c}{12} \partial_z^3 \epsilon^z\label{energy momentum change}
+\intertext{という記号を導入すると，}
+  \frac{1}{\pi} \int_{\Sigma} d^2\xi \left[ (\partial_{\bar{z}}\epsilon^z)\langle T(\xi)X \rangle - h(\xi)\langle \delta_\epsilon T(\xi)X \rangle \right] &+ \langle \delta_\epsilon X \rangle + O(h^2) = 0\label{energy momentum tensor relative}
+\end{align}
+\eqref{energy momentum tensor relative}式をを$h(\zeta)$について汎函数微分を
+してから$h=0$とおき\eqref{h1order}式を用いると、求める恒等式として
+\begin{align}
+    \frac{1}{\pi} \int_{\Sigma} d^2\xi (\partial_{\bar{z}}\epsilon^z)(\xi)\langle T(\xi)T(\zeta)X \rangle + \langle (\delta_\epsilon T)(\zeta)X \rangle + \langle T(\zeta)\delta_\epsilon X \rangle = 0
+\end{align}
+この式は共形ワード高橋恒等式の自然な拡張とみなすことができる。
+したがって、エネルギー運動量テンソルの無限小変換を表す恒等式として解釈することができる。
+\eqref{energy momentum change}式の1項目と2項目は共形ウェイト2のプライマリ場
+の無限小共形変換に対する変換則と同じである。
+3項目は非斉次項であり$c$に比例して量子論的なアノマリー項である。
 \subsection{ビラソロ代数}
 \subsubsection{動径量子化}
 ミンコフスキー時空上の場の量子論において、時間と空間は計量の符号を通じて区別される。これに対し、2次元CFTではウィック回転によりユークリッド化された複素平面上で議論を展開することが多い。このとき、時間方向と空間方向は対等に扱われる。
