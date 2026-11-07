@@ -1,6 +1,5 @@
 \documentclass[11pt, dvipdfmx]{article}
 
-\usepackage[utf8]{inputenc}
 \usepackage[margin=35truemm]{geometry} % 余白を35mmに設定
 \usepackage{tikz-feynhand}
 % --- 数学関連のパッケージ ---
@@ -10,15 +9,14 @@
 \usepackage{physics}      % 物理学の数式用マクロ (bra, ket, dvなど)
 \usepackage{bm}           % 太字の数式 \bm{}
 \usepackage{simplewick}   % Wick縮約 \contraction
-\usepackage{showkeys}
+% \usepackage{showkeys}  % ラベル名をPDFに表示（下書き時のみ有効にする）
 % --- 図や色、レイアウト関連のパッケージ ---
-\usepackage{graphicx, color} % 図の挿入や色の利用
+\usepackage{graphicx}     % 図の挿入
 \usepackage{tikz}         % 図形描画
 \usetikzlibrary{intersections,calc,arrows.meta}
 \usepackage{float}        % 図表の位置を調整 [H]など
 \usepackage{siunitx}      % 単位をきれいに表示 \SI{100}{\kilo\gram}など
 \usepackage{ascmac}       % itemboxなどの囲み枠
-\usepackage{amsmath}
 \usepackage{amssymb}      % 数学記号 (\becauseなど)
 \usepackage{lastnum}
 \numberwithin{equation}{section}
@@ -26,6 +24,7 @@
 \parindent = 0pt % 全体の段落開始時のインデントをなくす
 \newcommand{\intinf}{\int_{-\infty}^\infty}
 \newcommand{\pathint}{\int \mathcal{D}\varphi}
+\newcommand{\blankline}{\par\vspace{\baselineskip}} % 1行分の空白を入れて段落を分ける
 \newenvironment{note}{
     \vspace{1ex} % 上部の余白（お好みで調整）
     \par\footnotesize\noindent\textbf{【注】}
@@ -44,7 +43,6 @@
     urlcolor=blue
 ]{hyperref}
 \usepackage{pxjahyper} % hyperrefの日本語文字化け対策
-\usepackage{amsmath, amssymb}
 \usepackage[many]{tcolorbox} % manyオプションでskinsやtheoremsなどを一括読み込み
 
 % tcolorboxを用いた新しい定理環境の定義
@@ -152,7 +150,7 @@ $\sigma$を$\int dl$に比例するようにパラメータを選ぶことがで
 最後に、ワイル変換を行うことにより、$\det h_{ab}=-1$が保たれる。
 $f$はワイル変換の下で不変であるため、$\partial_\sigma h_{\sigma\sigma}=0$となる。
 これで全ての条件が同時に成り立つことが確認できた。
-\\
+\blankline
 \eqref{gauge cond. 3}の条件を$h_{\sigma\sigma}$について解く。
 $h_{\sigma\sigma}$は\eqref{gauge cond. 2}から$\sigma$に依存しないので、計量の中で独立なものは$h_{\sigma\sigma}(\tau),h_{\sigma\tau}$のみである。
 よって、逆行列は次のように書くことができる。
@@ -191,16 +189,17 @@ Y^-(\tau,\sigma) &= X^-(\tau,\sigma) - x^-(\tau)
         &\ \ \ +h_{\tau\sigma}\qty( \partial_\sigma X^i \partial_\tau X^i) + h_{\sigma\sigma}^{-1}\qty(1-h_{\sigma\tau}^2) \partial_\sigma X^i \partial_\sigma X^i\Bigg]\notag
     \end{align}
 ここで、$x^-(\tau),Y^-(\tau,\sigma)$を導入する.
-$X^-=x^-(\tau)+Y^-(\tau,\sigma)$を代入すると、次の世に書き換えることができる。
+$X^-=x^-(\tau)+Y^-(\tau,\sigma)$を代入すると、次のように書き換えることができる。
 \begin{align}   
-    L=-\frac{1}{4\pi\alpha'}\int d\sigma\Bigg[-h_{\sigma\sigma}\qty(-2\partial_\tau x^-+ \partial_\tau X^i \partial_\tau X^i) + h_{\sigma\tau}\qty(-2\partial_\sigma Y^-  + \partial_\tau X^i \partial_\sigma X^i) + h_{\tau\sigma}\qty( \partial_\sigma X^i \partial_\tau X^i) + h_{\sigma\sigma}^{-1}\qty(1-h_{\sigma\tau}^2) \partial_\sigma X^i \partial_\sigma X^i\Bigg]\notag
+    L=&-\frac{1}{4\pi\alpha'}\int d\sigma\Bigg[-h_{\sigma\sigma}\qty(-2\partial_\tau x^-+ \partial_\tau X^i \partial_\tau X^i) + h_{\sigma\tau}\qty(-2\partial_\sigma Y^-  + \partial_\tau X^i \partial_\sigma X^i) \notag\\
+    &\hspace{2em} + h_{\tau\sigma}\qty( \partial_\sigma X^i \partial_\tau X^i) + h_{\sigma\sigma}^{-1}\qty(1-h_{\sigma\tau}^2) \partial_\sigma X^i \partial_\sigma X^i\Bigg]\notag
 \end{align}
 これにより、\eqref{light gauge poly action}が得られる。
 \end{note}
 $Y^-$に関して、時間微分項がないので、$Y^-$は非動的な変数である。
 その代わりラグランジュの未定乗数のように扱うことができて、つまり$\partial_\sigma^2 h_{\sigma\tau}=0$で
-あることがわかる。(変文による微分がつき、それらを部分積分すれば良い。)
-\\
+あることがわかる。(変分による微分がつき、それらを部分積分すれば良い。)
+\blankline
 ここで、作用の停留条件から出てくるノイマン境界条件を次のように書き直すことができる。
 
 \begin{align}
@@ -233,7 +232,7 @@ $x^-$に共役な運動量は
     =\frac{p^+}{l}\partial_\tau X^i
 \end{align}
 とかけることがわかる。
-\\
+\blankline
 これらを用いてハミルトニアンは
 \begin{align}
     H=&p_-\partial_\tau x^- + \int d\sigma (\Pi_i \partial_\tau X^i )- L\notag\\
@@ -244,7 +243,7 @@ $x^-$に共役な運動量は
 これは$D-2$自由場$X^i$に対するハミルトニアンと同じである。ここでは$p^+$が保存量(時間によらない)である。
 ハミルトン方程式より運動方程式は次のようになる。
 \begin{align}
-    \partial_\tau x^-=\frac{\delta H}{\delta p_-}, \quad\partial_\tau p^+ = -\frac{\delta H}{\delta x^-}=0, \quad
+    \partial_\tau x^-=\frac{\delta H}{\delta p_-}, \quad\partial_\tau p^+ = -\frac{\delta H}{\delta x^-}=0, \notag\\
     \partial_\tau X^i = \frac{\delta H}{\delta \Pi^i} = \frac{l}{ p^+} \Pi^i, \quad
     \partial_\tau \Pi^i = -\frac{\delta H}{\delta X^i} = \frac{l}{4\pi^2\alpha'^2 p^+} \partial_\sigma^2 X^i
 \end{align}
@@ -273,7 +272,7 @@ $X^i$は実であるので、
     x^i=&\frac{1}{l}\int_0^ld \sigma \ X^i(\tau,\sigma)\\
     p^i=&\frac{1}{l}\int_0^ld \sigma \ \Pi^i=\frac{p^+}{l}\int d\sigma \ \partial_\tau X^i
 \end{align}
-\\
+\blankline
 量子化をするため、同時刻正隼交換関係をかす。
 \begin{align}
     [x^-,p^+]=i\eta^{-+}=&-i\\
@@ -309,13 +308,13 @@ $X^i$は実であるので、
 最後の行は間 $[0,\ell]$ 上のノイマン境界条件の固有関数 $\{1, \cos(n\pi\sigma/\ell)\}$ の完全性関係
 
 
-$$\frac{1}{\ell} + \frac{2}{\ell}\sum_{n=1}^{\infty}\cos\frac{n\pi\sigma}{\ell}\cos\frac{n\pi\sigma'}{\ell} = \delta(\sigma - \sigma') \qquad (0 \le \sigma,\sigma' \le \ell)$$を用いた。
+\[\frac{1}{\ell} + \frac{2}{\ell}\sum_{n=1}^{\infty}\cos\frac{n\pi\sigma}{\ell}\cos\frac{n\pi\sigma'}{\ell} = \delta(\sigma - \sigma') \qquad (0 \le \sigma,\sigma' \le \ell)\]を用いた。
 \end{note}
 さらに各$m,i$に対して、調和振動子代数を満たすように再規格化を行う。
 \begin{align}
     \alpha_n^i\sim m^{1/2}a, \ \ \alpha_{-n}^i\sim m^{1/2}a^\dagger
 \end{align}
-\\
+\blankline
 次に状態との対応を見る。状態$\ket{0;k},k=(k^+,k^i)$は下降演算子が作用した時に消滅する用に定義される。
 また重心運動量の固有状態でもあり、次の式を満たすものである。
 \begin{align}
@@ -329,7 +328,7 @@ $$\frac{1}{\ell} + \frac{2}{\ell}\sum_{n=1}^{\infty}\cos\frac{n\pi\sigma}{\ell}\
   \frac{(\alpha_{-n}^i)^{N_{in}}}{(n^{N_{in}} N_{in}!)^{1/2}} ] \ket{0;k}
 \end{align}
 独立な状態が重心$k^+,k^i$と占有数$N_{in}$によって指定される。重心運動量が点粒子の自由度の程度を表していることが窺える。一方で、調和振動子は無限の内部自由度を持っている。
-\\
+\blankline
 \eqref{fourie expansion}式を\eqref{light cone hamiltonian}式に代入することにより、ハミルトニアンは調和振動子の形に書き直される。
 \begin{align}
     H=\frac{p^ip^i}{2p^+}+\frac{1}{2p^+ \alpha'} \sum_{n\neq 0} (\alpha_{-n}^i \alpha_n^i+A)
@@ -346,12 +345,13 @@ H &= \frac{l}{4\pi\alpha' p^+} \int_0^{l} d\sigma
 &\qquad \times \qty( \frac{p^i}{p^+}
   + i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{1}{n}
     \alpha_n^i\, \partial_\tau e^{-in\pi c \tau/l}
-    \cos\frac{n\pi\sigma}{l} )^2
-  + \frac{1}{2\pi\alpha'} \qty[ \partial_\sigma \qty( x_0^i + \frac{p^i}{p^+}\tau
+    \cos\frac{n\pi\sigma}{l} )^2 \nonumber \\
+&\qquad + \frac{1}{2\pi\alpha'} \qty[ \partial_\sigma \qty( x_0^i + \frac{p^i}{p^+}\tau
    + i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{1}{n}
    \alpha_n^i e^{-in\pi c \tau/l} \cos\frac{n\pi\sigma}{l} ) ]^2 \Bigg]\\
    &=\frac{l}{4\pi\alpha' p^+} \int_0^{l} d\sigma \,
-  \Bigg[ 2\pi\alpha' \qty(\frac{p^+}{l})^2  \qty( \qty(\frac{p^i}{p^+})^2
+  \Bigg[ 2\pi\alpha' \qty(\frac{p^+}{l})^2 \nonumber \\
+&\qquad \times \qty( \qty(\frac{p^i}{p^+})^2
   + \qty(i(2\alpha')^{1/2} \sum_{n\neq 0} \frac{1}{n}
     \alpha_n^i\, \frac{-in\pi c}{l} e^{-in\pi c \tau/l}
     \cos\frac{n\pi\sigma}{l} )^2)\\
@@ -369,10 +369,10 @@ H &= \frac{l}{4\pi\alpha' p^+} \int_0^{l} d\sigma
 光円錐ゲージとは、ローレンツ対称性が見えにくいゲージ固定である。
 なので、ローレンツ変換の生成子$M^{\mu\nu}$を見つっけることが必要であり、$p^{\mu}$などと正しい交換関係を満たすか確かめる必要がある。
 この結果$A=-1$だとわかり、それは時空次元が$D=26$の時であるときのみ成り立つことが確かめられる。
-\\
+\blankline
 これの説明を試みてみよう。
 $A,D$が間違った値を取る時、ローレンツ対称性が破れることになることの説明も試みてみる。
-\\
+\blankline
 まず、ハミルトニアンに含まれる交換子由来の定数項は、各調和振動子のモードのゼロ点エネルギー$\frac{1}{2}\omega$をボソン場$X^\mu$に対して足し合わせたものである。
 言い換えると、自然な演算子の順序はいつも平均をとったもの $\tfrac12\omega(aa^{\dagger} + a^\dagger a)$ になり、これは $\omega(a^\dagger a + \tfrac12)$ と同じある。
 ハミルトニアンの中で、$A$は次のような表式をとる。
@@ -388,10 +388,10 @@ $D-2$とは横方向に足し上げたことに由来する。この表式を見
     高い振動数のモードを抑える因子 $e^{-\epsilon n}$ を入れて和をとると、等比級数の微分から
 
 
-$$\sum_{n=1}^\infty n\,e^{-\epsilon n} = \frac{e^{-\epsilon}}{(1-e^{-\epsilon})^2} = \frac{1}{4\sinh^2(\epsilon/2)}$$
+\[\sum_{n=1}^\infty n\,e^{-\epsilon n} = \frac{e^{-\epsilon}}{(1-e^{-\epsilon})^2} = \frac{1}{4\sinh^2(\epsilon/2)}\]
 
-となり、$\epsilon \to 0$ で展開すると、$\sinh \frac{\varepsilon}{2}=\frac{\epsilon}{2} + O(\epsilon^3)$より
-$$\sum_{n=1}^\infty n\,e^{-\epsilon n} = \frac{1}{4}\cdot \frac{1}{(\frac{\varepsilon}{2})^2}\qty(1-\frac{\varepsilon^2}{3!2^2})+\cdots=\frac{1}{\epsilon^2} - \frac{1}{12} + O(\epsilon^2)$$
+となり、$\epsilon \to 0$ で展開すると、$\sinh \frac{\epsilon}{2}=\frac{\epsilon}{2} + O(\epsilon^3)$より
+\[\sum_{n=1}^\infty n\,e^{-\epsilon n} = \frac{1}{4}\cdot \frac{1}{(\frac{\epsilon}{2})^2}\qty(1-\frac{\epsilon^2}{3!2^2})+\cdots=\frac{1}{\epsilon^2} - \frac{1}{12} + O(\epsilon^2)\]
 
 です。発散する部分 $1/\epsilon^2$ と、有限で $\epsilon$ によらない部分 $-1/12$ にきれいに分かれます。
 \end{note}これにより
@@ -400,12 +400,12 @@ $$\sum_{n=1}^\infty n\,e^{-\epsilon n} = \frac{1}{4}\cdot \frac{1}{(\frac{\varep
 \end{align}
 となる。光円錐ゲージでローレンツ対称性を保つためには、$A=-1$である必要があり、これにより$D-2=24$、すなわち$D=26$が導かれる。
 この有限のエネルギーはカシミアエネルギーと呼ばれ、弦が有限の長さを持つことによって生じる。
-\\
-\\
+\blankline
+\blankline
 質量殻条件 $p^\mu p_\mu = -m^2$ を光円錐座標で書くと
 
 
-$$-2p^+p^- + p^ip^i = -m^2 \quad\Rightarrow\quad m^2 = 2p^+p^- - p^ip^i$$
+\[-2p^+p^- + p^ip^i = -m^2 \quad\Rightarrow\quad m^2 = 2p^+p^- - p^ip^i\]
 
 で、$p^- = H$ を代入すると
 \begin{align}
@@ -428,7 +428,7 @@ $D>0$の時は質量の2乗が負であり、これはタキオンであるこ�
 場の理論を考えてみると、スカラー場のポテンシャルエネルギーは$\frac{1}{2}m^2\phi^2$であり、
 質量2乗が負であるとは、弦がない状態、所謂真空状態が不安定であることを意味する。
 これは実は重大な問題であり、ボソン弦の中に安定な真空状態があるのかどうかは知られていない。
-\\
+\blankline
 次にもっとも低い励起状態に注目する。その状態と質量は次のようにかける。
 \begin{align}
     \ket{1;k} = \alpha^{i\dagger}_1 \ket{0;k}\ , \ m^2 =  \frac{26-D}{24\alpha'}\label{light cone massless}
@@ -440,7 +440,7 @@ $SO(D-2)$の群に対して状態は不変に保たれる。つまり、内部�
 massive粒子はスピン$j$によってつまり$SO(3)$の表現として分類され$2j+1$個の状態を持つ。
 massless粒子はヘリシティ$h$によって分類され、それは$SO(2)$の生成子の固有値となっている。
 したがって、ローレンツ不変性だけなら状態は1つであるが、CPT対称性は $\lambda$ を $-\lambda$ に移すので、$\lambda \neq 0$ の場合には2つの状態が必要になる。
-\\
+\blankline
 $D$次元では、massiveなベクトル粒子は$D-1$個の状態を持ち、一方でmasslessなベクトル粒子は$D-2$個の状態を持つ。ナイーブに、第一励起状態でmasslessなベクトル粒子$\alpha_{-1}^i \ket{0;k}$が$D-2$個の状態を持つための条件を考えてみる。
 \eqref{light cone massless}式から質量がゼロとなる条件は
 \begin{align}
@@ -467,7 +467,8 @@ $D$次元では、massiveなベクトル粒子は$D-1$個の状態を持ち、�
     \end{align}
     これにフーリエ変換した式を代入すると、次のように変形することができる。
     \begin{align}
-        M^{\mu\nu}=x^ip^j - x^jp^i+\int X^i_{\text{osc}}\Pi^j_{\text{osc}} -(i \leftrightarrow j)= x^ip^j - x^jp^i+\frac{i}{2}\sum_{n\neq0}\frac{1}{n}\left(\alpha^i_n\alpha^j_{-n} + \alpha^i_n\alpha^j_n e^{-2i\pi nc\tau/\ell}- (i \leftrightarrow j)\right)
+        M^{\mu\nu}=&x^ip^j - x^jp^i+\int X^i_{\text{osc}}\Pi^j_{\text{osc}} -(i \leftrightarrow j)\notag\\
+        =& x^ip^j - x^jp^i+\frac{i}{2}\sum_{n\neq0}\frac{1}{n}\left(\alpha^i_n\alpha^j_{-n} + \alpha^i_n\alpha^j_n e^{-2i\pi nc\tau/\ell}- (i \leftrightarrow j)\right)
     \end{align}
    反対称化により、$\alpha^i_n\alpha^j_n e^{-2i\pi nc\tau/\ell}$の項は消え、最終的に
    \begin{align}
@@ -478,10 +479,10 @@ $D$次元では、massiveなベクトル粒子は$D-1$個の状態を持ち、�
     $i,j$に関して反対称であり、ローレンツ不変性はゼロ点の定数の寄与は残らない。
    massiveな粒子において明白になるのは$SO(D-1)$スピン対象群の部分群$SO(D-2)$だけでは光円錐量子化において役にたつ。
    例えば、$(D-1)$次元のベクトルは$SO(D-2)$の表現で分解すると、1つのスカラーと$D-2$個のベクトルに分かれる。
-   $$\mathbf v = (v^1, 0, \dots, 0) + (0, v^2, \dots, v^{D-1}) $$
-   \\
+   \[\mathbf v = (v^1, 0, \dots, 0) + (0, v^2, \dots, v^{D-1})\]
+\blankline
    massiveな高次の弦の励起状態として、$SO(D-1)$の表現は完全体になる。
-   \\
+\blankline
    レベル$N$においては、例えばスピン成分$S^{23}$の最大値はN
    であり、したがって
 
@@ -497,15 +498,15 @@ S^{23} \le 1 + \alpha' m^2 =N\quad \text{(\eqref{light cone mass shell})}
 \subsection{共形変換の定義}
 共形変換は、二つの多様体$M,N$の開集合$U,V$に対して、微分可能写像を$\varphi: U \to V$とする。
 $g$と$g'$はそれぞれ$M$と$N$の計量テンソルである。
-このとき引き戻しが$$\varphi^* g' = \Omega g$$を満たすとき、共形変換であると言う。ここで$\Omega$は$U$上のスカラー関数である。\\
-このとき$M,N$の局所座標をそれぞれ$x,x'$とすると$T_pM$の基底ベクトル$\pdv{x^\mu},\pdv{x^\nu}$を代入して$$g'\qty(\phi_*\qty(\pdv{x^\mu}),\phi_*\qty(\pdv{x^\nu})) = \Lambda g\qty(\pdv{x^\mu},\pdv{x^\nu})$$が成り立つ。すなわち、
+このとき引き戻しが$\varphi^* g' = \Omega g$を満たすとき、共形変換であると言う。ここで$\Omega$は$U$上のスカラー関数である。\\
+このとき$M,N$の局所座標をそれぞれ$x,x'$とすると$T_pM$の基底ベクトル$\pdv{x^\mu},\pdv{x^\nu}$を代入して\[g'\qty(\phi_*\qty(\pdv{x^\mu}),\phi_*\qty(\pdv{x^\nu})) = \Lambda g\qty(\pdv{x^\mu},\pdv{x^\nu})\]が成り立つ。すなわち、
 \begin{align}
     g'\qty(\pdv{x'^\rho}{x^\mu}\pdv{x'^\rho},\pdv{x'^\sigma}{x^\nu}\pdv{x'^\sigma}) &= \Lambda g\qty(\pdv{x^\mu},\pdv{x^\nu})\\
     g'_{\rho\sigma}\pdv{x'^\rho}{x^\mu}\pdv{x'^\sigma}{x^\nu} &= \Lambda g_{\mu\nu}
 \end{align}
 $M=M',g=g'$とすると次の関係が成り立つ。
 \begin{align}
-    \eta_{\rho \sigma}\pdv{x'^\rho}{x^\mu}\pdv{x'^\sigma}{x^\nu} &= \Lambda(x) \eta_{\mu\nu}\label{3}
+    \eta_{\rho \sigma}\pdv{x'^\rho}{x^\mu}\pdv{x'^\sigma}{x^\nu} &= \Lambda(x) \eta_{\mu\nu}\label{conformal condition}
 \end{align}
 共形変換の下での線素$ds^2 = \eta_{\mu\nu}dx^\mu dx^\nu$は次のように変換される。
 \begin{align}
@@ -514,27 +515,27 @@ ds^2= \eta_{\rho \sigma}dx'^\rho dx'^\sigma
 = \Lambda \eta_{\mu\nu}dx^\mu dx^\nu
 \end{align}
 つまり、共形変換とは座標変換とスケール変換の組み合わせである。
-\\
+\blankline
 2つの共形変換の合成も共形変換であるので、共形変換全体は群を成す。この群を共形群と呼ぶ。$\Lambda(x)=1$なら等長写像群に対応する。
 これ以降平坦な空間を仮定して考える。
 \subsection{無限小変換}
 ここでは無限小共形変換を考える。$x^\mu \to x'^\mu = x^\mu + \epsilon^\mu(x) (\epsilon\ll1),\Lambda(x)=1+K(x)$とする。
-これを(\ref{3})式に代入する。
+これを\eqref{conformal condition}式に代入する。
 \begin{align}
     \eta_{\rho \sigma}\pdv{x'^\rho}{x^\mu}\pdv{x'^\sigma}{x^\nu} &= \Lambda(x) \eta_{\mu\nu}\\
 \end{align}
 変形して次の式を得る。
 \begin{align}
-    \partial_\mu \epsilon_\nu + \partial_\nu \epsilon_\mu &= K(x) \eta_{\mu\nu}\label{7}
+    \partial_\mu \epsilon_\nu + \partial_\nu \epsilon_\mu &= K(x) \eta_{\mu\nu}\label{conformal Killing K}
 \end{align}
 この$K(x)$を$\epsilon$を用いて表そう。トレースをとる操作を行う。つまり両辺に$\eta^{\nu\mu}$をかけて添え字を縮約させる。
 \begin{align}
     \partial_\mu \epsilon^\mu + \partial_\nu \epsilon^\nu &= K(x) \eta_{\mu\nu}\eta^{\nu\mu}\\
     K(x)=\frac{2\partial^\mu\epsilon_\mu}{d}
 \end{align}
-これを(\ref{7})式に代入すると
+これを\eqref{conformal Killing K}式に代入すると
 \begin{align}
-    \partial_\mu \epsilon_\nu + \partial_\nu \epsilon_\mu &= \frac{2}{d}(\partial\cdot\epsilon)\eta_{\mu\nu}\label{11}
+    \partial_\mu \epsilon_\nu + \partial_\nu \epsilon_\mu &= \frac{2}{d}(\partial\cdot\epsilon)\eta_{\mu\nu}\label{conformal Killing}
 \end{align}
 両辺に$\partial^\nu$を作用させると
 \begin{align}
@@ -545,23 +546,23 @@ ds^2= \eta_{\rho \sigma}dx'^\rho dx'^\sigma
 \begin{align}
     2\partial_\mu\partial_\nu(\partial\cdot\epsilon) + 2\square \epsilon_\mu &= \frac{4}{d}\partial_\mu\partial_\nu(\partial\cdot\epsilon)\\
     d \partial_\mu\partial_\nu(\partial\cdot\epsilon) + \square \eta_{\mu\nu}(\partial \cdot \epsilon) &= 2\partial_\mu\partial_\nu(\partial\cdot\epsilon)\\
-    \eta_{\mu\nu}\square(\partial\cdot\epsilon) +(d-2)\partial_\mu\partial_\nu(\partial\cdot\epsilon)&=0\label{14}
+    \eta_{\mu\nu}\square(\partial\cdot\epsilon) +(d-2)\partial_\mu\partial_\nu(\partial\cdot\epsilon)&=0\label{conformal Killing d-2}
 \end{align}
 $\eta^{\mu\nu}$をかけてトレースをとると
 \begin{align}   
     \square(\partial\cdot\epsilon) +(d-2)\square(\partial\cdot\epsilon)&=0\\
-    (d-1)\square(\partial\cdot\epsilon)&=0\label{19}
+    (d-1)\square(\partial\cdot\epsilon)&=0\label{box divergence epsilon}
 \end{align}
-(\ref{11})式に$\partial_\rho $を作用させ、添え字を入れ替えたもの3式を用意し、辺辺足し引きすることにより、次の式を得る。
+\eqref{conformal Killing}式に$\partial_\rho $を作用させ、添え字を入れ替えたもの3式を用意し、辺辺足し引きすることにより、次の式を得る。
 \begin{align}
-    2\partial_\rho\partial_\mu \epsilon_\nu &= \frac{2}{d}\qty(\eta_{\mu\rho}\partial_\nu + \eta_{\nu\rho}\partial_\mu - \eta_{\mu\nu}\partial_\rho)(\partial\cdot\epsilon)\label{18}
+    2\partial_\rho\partial_\mu \epsilon_\nu &= \frac{2}{d}\qty(\eta_{\mu\rho}\partial_\nu + \eta_{\nu\rho}\partial_\mu - \eta_{\mu\nu}\partial_\rho)(\partial\cdot\epsilon)\label{second derivative epsilon}
 \end{align}
 ここから先は2次元と3次元以上の場合で、$\epsilon$の多項式の次数が異なってくるので、分けて考える。
 \subsection{3次元以上の共形場理論}
 3次元以上に限って考える。
-その場合、(\ref{19})式から$\square(\partial \cdot \epsilon)=0$となる。(\ref{14})式に立ち返ると、それは$\partial_\mu\partial_\nu (\partial\cdot\epsilon)=0$を意味する。
+その場合、\eqref{box divergence epsilon}式から$\square(\partial \cdot \epsilon)=0$となる。\eqref{conformal Killing d-2}式に立ち返ると、それは$\partial_\mu\partial_\nu (\partial\cdot\epsilon)=0$を意味する。
 従って、$\partial\cdot\epsilon$は高々1次の多項式である。つまり、$\partial\cdot\epsilon = A + B_\mu x^\mu$と書ける。
-(\ref{18})式に立ち返ると、
+\eqref{second derivative epsilon}式に立ち返ると、
 右辺が定数になることより、
 左辺も定数になり、$\epsilon$は高々2次の多項式であることがわかる。
 つまり、
@@ -570,13 +571,13 @@ $\eta^{\mu\nu}$をかけてトレースをとると
 \end{align}
 と書ける。ここで、対称性より$c_{\mu\nu\rho}=c_{\mu\rho\nu}$が成り立っている。
 また、$\epsilon$は無限小パラメータであるため、$a_\mu,b_{\mu\nu},c_{\mu\nu\rho}\ll1$が成り立っている。
-\\(\ref{11})式に戻ると、これは斉次方程式であるため、各項の次数ごとに比較できる。
-まず$a_\mu$については何も条件が課されない。次に$b_{\mu\nu}$については、(\ref{11})式に代入することにより
+\\\eqref{conformal Killing}式に戻ると、これは斉次方程式であるため、各項の次数ごとに比較できる。
+まず$a_\mu$については何も条件が課されない。次に$b_{\mu\nu}$については、\eqref{conformal Killing}式に代入することにより
 \begin{align}
-    b_{\mu\nu} + b_{\nu\mu} = \frac{2}{d}b^\rho_{\ \rho} \eta_{\mu\nu}\label{22}
+    b_{\mu\nu} + b_{\nu\mu} = \frac{2}{d}b^\rho_{\ \rho} \eta_{\mu\nu}\label{b condition}
 \end{align}
 $b_{\mu\nu}$をさらに対称成分と反対称成分に分ける。$b_{\mu\nu}=n_{\mu\nu}+m_{\mu\nu}\ \ (n_{\mu\nu}=n_{\nu\mu}, m_{\mu\nu}=-m_{\nu\mu})$
-とすると、計量が対角行列であることから、$m_{\mu\nu}$は(\ref{22})式を満たしている。つまり、反対称な部分は特に条件が課されない。一方、対称な部分に関しては$n_{\mu\nu}=\frac{1}{d}n^\rho_{\ \rho}\eta_{\mu\nu}$である。
+とすると、計量が対角行列であることから、$m_{\mu\nu}$は\eqref{b condition}式を満たしている。つまり、反対称な部分は特に条件が課されない。一方、対称な部分に関しては$n_{\mu\nu}=\frac{1}{d}n^\rho_{\ \rho}\eta_{\mu\nu}$である。
 つまり、対称な部分については$\eta_{\mu\nu}$に比例している。以上より、次のように表示することが出来る。
 \begin{align}
     b_{\mu\nu} = m_{\mu\nu} + \alpha \eta_{\mu\nu}
@@ -584,20 +585,20 @@ $b_{\mu\nu}$をさらに対称成分と反対称成分に分ける。$b_{\mu\nu}
 ここで$m_{\mu\nu}$は反対称テンソルであり、$\alpha$はスカラーである。1項目は回転を表しており、2項目はdilationを表している。dilationとはスケール変換のことである。
     反対称な部分は$x'^{\mu}=(\delta^\mu_\nu+m^\mu_{\ \nu})x^\nu$という変換を表しており、この変換は$\phi'(x)=\phi(x-mx )=\phi(x)-m^{\mu}_{\ \nu}x^\nu\partial_\mu \phi(x)=\phi(x)-m^{\mu\nu}x_{\nu}\partial_\mu\phi(x)$となる。 生成子は$\phi'(x)=\phi(s)-iG_a\phi$の$G_a$であるので、
     反対称なテンソルであることに注意して、この変換の生成子$L_{\mu\nu}$は $L_{\mu\nu} =i (x_\mu \partial_\nu - x_\nu \partial_\mu)$ の形式である。
-\\
-  2次の係数$c_{\mu\nu\rho}$について考える。\eqref{18}式に代入すると次の関係が得られる。
+\blankline
+  2次の係数$c_{\mu\nu\rho}$について考える。\eqref{second derivative epsilon}式に代入すると次の関係が得られる。
 \begin{align}
-    2c_{\mu\nu\rho} = \frac{2}{d}\qty(\eta_{\mu\rho}c^\sigma_{\ \nu\sigma} + \eta_{\nu\rho}c^\sigma_{\ \mu\sigma} - \eta_{\mu\nu}c^\sigma_{\ \rho\sigma})\label{28}
+    2c_{\mu\nu\rho} = \frac{2}{d}\qty(\eta_{\mu\rho}c^\sigma_{\ \nu\sigma} + \eta_{\nu\rho}c^\sigma_{\ \mu\sigma} - \eta_{\mu\nu}c^\sigma_{\ \rho\sigma})\label{c condition}
 \end{align}
 ここで、$f_\mu=\frac{1}{d}c^\rho_{\ \rho\mu}$と置くと、次のように書き換ええることが出来る。
 \begin{align}
-    c_{\mu\nu\rho} = \eta_{\mu\rho}f_\nu + \eta_{\nu\rho}f_\mu - \eta_{\mu\nu}f_\rho\label{24}
+    c_{\mu\nu\rho} = \eta_{\mu\rho}f_\nu + \eta_{\nu\rho}f_\mu - \eta_{\mu\nu}f_\rho\label{c solution}
 \end{align}
 これは次のような変換に対応している。
 \begin{align}
-    x'^\mu=x^\mu + 2x^\mu (f\cdot x) - f^\mu (x\cdot x)\label{25}
+    x'^\mu=x^\mu + 2x^\mu (f\cdot x) - f^\mu (x\cdot x)\label{special conformal}
 \end{align}
-一見異なるように見えるが、(\ref{24})式の1,2項目が(\ref{25})式の1項目に対応しており、(\ref{24})式の3項目が(\ref{25})式の2項目に対応している。
+一見異なるように見えるが、\eqref{c solution}式の1,2項目が\eqref{special conformal}式の1項目に対応しており、\eqref{c solution}式の3項目が\eqref{special conformal}式の2項目に対応している。
 この変換は特殊共形変換(Special conformal transformation , SCT)と呼ばれる。\\
 以上は座標変換を考えていたが、最後に場の無限小変換について考える。
 \begin{align}
@@ -632,7 +633,7 @@ SCTについて説明してく。まず、このSCTの有限変換が無限小�
     &\simeq (x^\mu - b^\mu x^2)(1 + 2b\cdot x)\\
     &\simeq x^\mu + 2x^\mu(b\cdot x) - b^\mu x^2
 \end{align}
-したがって、(\ref{25})式の表式と一致することが分かる。
+したがって、\eqref{special conformal}式の表式と一致することが分かる。
 \\次に、この有限変換を導出する。
 この有限変換は反転、並進、再び反転の合成として得られる。
 反転は次のように定義される。
@@ -650,7 +651,7 @@ SCTについて説明してく。まず、このSCTの有限変換が無限小�
 こうして、SCFTの有限変換が得られる。
 \section{2次元の共形場理論}
 \subsection{複素平面とのつながり}
-二次元の共形場理論に限って考える。平坦な空間のため、計量を$\eta_{00}=1,\eta_{11}=1,\eta _{01}=\eta_{10}=0$とすると(\ref{11})より次の関係が成り立つ。
+二次元の共形場理論に限って考える。平坦な空間のため、計量を$\eta_{00}=1,\eta_{11}=1,\eta _{01}=\eta_{10}=0$とすると\eqref{conformal Killing}より次の関係が成り立つ。
 \begin{align}
     \partial_1\epsilon_1 &= \partial_2\epsilon_2\\
     \partial_1\epsilon_2 &= -\partial_2\epsilon_1
@@ -684,7 +685,7 @@ SCTについて説明してく。まず、このSCTの有限変換が無限小�
     &= \qty|\pdv{f}{z}|^2 ds^2
 \end{align}
 となる。したがって、任意の正則関数は共形変換を与えることがわかる。
-\\
+\blankline
 座標の無限小変換から場の無限小変換を求める。そのためにまず、無限小変換に対してローラン展開をする。
 \begin{align}
     z' &= z + \epsilon(z)=z+\sum_{n\in \mathbb{Z}}\epsilon_n\cdot(-z^{n+1})\\
@@ -702,7 +703,7 @@ SCTについて説明してく。まず、このSCTの有限変換が無限小�
     &= -\sum_{n\in \mathbb{Z}}\epsilon_n\cdot l_n \phi(z,\overline{z}) - \sum_{n\in \mathbb{Z}}\overline{\epsilon}_n\cdot \overline{l}_n \phi(z,\overline{z})  
 \end{align}
 ただし、生成子は$l_n=-z^{n+1}\partial,\overline{l}_n=-\overline{z}^{n+1}\overline{\partial}$という表式をとる。$n$が整数なので、無限に多くの生成子が存在することになる。
-\\
+\blankline
 これらの交換関係は
 \begin{align}
     [l_n,l_m] 
@@ -713,7 +714,7 @@ SCTについて説明してく。まず、このSCTの有限変換が無限小�
 \end{align}
 となる。
 これらの代数関係はwitt algebraと呼ばれる。
-\\
+\blankline
 
 この節の最後に、大域的な共形変換について述べる。大域的共形変換とは、リーマン面$S^2\simeq \mathbb{C}\cup \{\infty\}$上の正則関数で表される変換である。
 witt代数に注目した時、$z=0$で特異点でないのは、$n\leq-1$の時である。
@@ -727,7 +728,7 @@ $\omega_a$を無限小パラメータとする次の変換の下で作用が不�
 \begin{align}
     x'^\mu=x^\mu+\omega_a\frac{\delta x^\mu}{\delta \omega_a}
     \\
-    \Phi'(x')=\Phi(x)+\omega_a \frac{\delta \mathcal{F}}{\delta \omega_a}\label{39}
+    \Phi'(x')=\Phi(x)+\omega_a \frac{\delta \mathcal{F}}{\delta \omega_a}\label{field transformation}
 \end{align}
 場の変分は次のように表される。
 \begin{align}
@@ -768,14 +769,14 @@ $\omega_a$が定数の場合は、作用の変分は次のように表される�
 \end{align}
 運動方程式より$\delta S=0$であるので、
 \begin{align}
-    \partial_\mu j^\mu_a=0\label{59}
+    \partial_\mu j^\mu_a=0\label{current conservation}
 \end{align}
 が成り立つ。
 ここから電荷を定義する。
 \begin{align}
     Q_a=\int d^{d-1}x j^0_a
 \end{align}
-これはカレントの保存(\ref{59})式を用いることにより、電荷が保存していることが分かる。
+これはカレントの保存\eqref{current conservation}式を用いることにより、電荷が保存していることが分かる。
 \begin{align}
     \frac{d}{d t}Q_a=\int d^{d-1}\partial_0j_a^0=-\int d^{d-1}x \partial_i j^i=0 
 \end{align}
@@ -785,7 +786,7 @@ $\omega_a$が定数の場合は、作用の変分は次のように表される�
     j_a^\mu \rightarrow j_a^\mu +\partial_\nu B_a^{\nu\mu}\ ,\ B_a^{\nu\mu}=-B_a^{\mu\nu} 
 \end{align}
 この変換に対して、$\partial_\mu$を作用させると2項目に対して、対称な部分と反対称な部分の積で0になるので、保存の式は成り立っている。
-\\
+\blankline
 次にエネルギーモーメントテンソルを考える。各添え字に対して、変化量を任意にとるため
 $x'^\mu=x^\mu +\omega^\mu(x)$という座標変換を考える。
 \begin{align}
@@ -811,7 +812,7 @@ $x'^\mu=x^\mu +\omega^\mu(x)$という座標変換を考える。
 共形変換$x'^\mu =x^\mu +\epsilon^\mu (x)$
 このとき、カレントとエネルギー運動量テンソルの関係は次のようになっている。
 \begin{align}
-    j_\mu=T_{\mu\nu}\epsilon^\nu\label{66}
+    j_\mu=T_{\mu\nu}\epsilon^\nu\label{current and T}
 \end{align}
 並進は共形変換であるので、カレントの保存は次を示す。今は並進のことを考えてるので、$\epsilon^\nu$は定数である。
 \begin{align}
@@ -821,12 +822,12 @@ $\epsilon$は任意であるので、$\partial^\mu T_{\mu\nu}=0$が得られる�
 \begin{align}
     0=\partial^\mu j_\mu =(\partial^\mu T_{\mu\nu})\epsilon^\nu + T_{\mu\nu}\partial^\mu \epsilon^\nu
     &= T_{\mu\nu}\partial^\mu \epsilon^\nu\\
-    &= T_{\mu\nu}\frac{1}{2}(\partial^\mu \epsilon^\nu + \partial^\nu \epsilon^\mu)\label{69}\\
-    &= T_{\mu\nu}\frac{1}{d}(\partial \cdot \epsilon)\eta^{\mu\nu}\label{70}\\
-    &= \frac{1}{d}(\partial \cdot \epsilon)T^{\ \mu}_\mu\label{71}
+    &= T_{\mu\nu}\frac{1}{2}(\partial^\mu \epsilon^\nu + \partial^\nu \epsilon^\mu)\label{T symmetrized}\\
+    &= T_{\mu\nu}\frac{1}{d}(\partial \cdot \epsilon)\eta^{\mu\nu}\label{T trace form}\\
+    &= \frac{1}{d}(\partial \cdot \epsilon)T^{\ \mu}_\mu\label{T traceless}
 \end{align}
-(\ref{70})式では共形キリング方程式(\ref{11})式を用いた。
-(\ref{71})式より、エネルギー運動量テンソルのトレースが0であるか、$\epsilon$がキリングベクトル($\partial \cdot \epsilon=0$)である場合に保存の式が成り立つ。共形キリングベクトルの場合は$\epsilon$はキリングベクトルではあるとは限らないので、エネルギー運動量テンソルのトレースが0である必要がある。
+\eqref{T trace form}式では共形キリング方程式\eqref{conformal Killing}式を用いた。
+\eqref{T traceless}式より、エネルギー運動量テンソルのトレースが0であるか、$\epsilon$がキリングベクトル($\partial \cdot \epsilon=0$)である場合に保存の式が成り立つ。共形キリングベクトルの場合は$\epsilon$はキリングベクトルではあるとは限らないので、エネルギー運動量テンソルのトレースが0である必要がある。
 \subsection{Ward-Takahashiの恒等式}
 場を量子化した場合を考える。今までは古典的に連続対称性に焦点ををあてていたが、量子レベルでは相関関数が重要になる。
 \subsubsection{相関関数}
@@ -863,7 +864,7 @@ $[D\phi]$は可能なすべての場の配置にわたる積分を表してい�
 =&\frac{1}{Z_0}\int \mathcal{D}\phi \ \mathcal{F}(\phi(x_1))\mathcal{F}(\phi(x_2))\cdots \mathcal{F}(\phi(x_n)) \exp\qty[i\int d^4x \ \mathcal{L}[\phi]]\notag\\
 =&\ev{\mathcal{F}(\phi(x_1))\mathcal{F}(\phi(x_2))\cdots \mathcal{F}(\phi(x_n))}
 \end{align}  
-2つ目の等号では積分変数を変えているに過ぎない。3つ目の等号では場の変換(\ref{39})と、変換に対して積分変数と作用は不変であることを用いている。
+2つ目の等号では積分変数を変えているに過ぎない。3つ目の等号では場の変換\eqref{field transformation}と、変換に対して積分変数と作用は不変であることを用いている。
 \subsubsection{Ward-Takahashi恒等式}
 ネーターの定理の量子論版がWard-Takahashi恒等式である。まず無限小変換を考える。
 \begin{align}
@@ -887,10 +888,10 @@ $[D\phi]$は可能なすべての場の配置にわたる積分を表してい�
 \end{align}
 これら2つの表現が任意の関数$\omega_a(x)$に対して成り立つためには次の関係が成り立つ必要がある。
 \begin{align}
-    \ev{X\partial_\mu j_a^\mu (x)}=-\sum_{j=1}^n \delta(x-x_j)\ev{\Phi(x_1)\cdots G_a \Phi(x_j)\cdots \Phi(x_n)}\label{87}
+    \ev{X\partial_\mu j_a^\mu (x)}=-\sum_{j=1}^n \delta(x-x_j)\ev{\Phi(x_1)\cdots G_a \Phi(x_j)\cdots \Phi(x_n)}\label{Ward takahashi}
 \end{align}
 この関係式はWard-Takahashiの恒等式と呼ばれる。左辺を見ると、時空座標$x$が場の引数と等しくなったときに発散することが分かる。逆に、場が挿入されていない点においてはカレントが保存していることが分かる。
-\\
+\blankline
 
 この恒等式により、系の対称性に対応する保存量、およびヒルベルト空間における変換の生成子を定義することができる。
 それを保存電荷と呼び$Q_a$とかく。保存電荷は空間成分でカレントを積分することにより定義される。
@@ -912,13 +913,13 @@ $[D\phi]$は可能なすべての場の配置にわたる積分を表してい�
 かを示している。したがって、保存電荷は変換の生成子である。
 \subsection{プライマリ場}
 共形場理論において中心的な役割を果たす場をプライマリ場を定義する。
-\\
+\blankline
 その前に、まず準プライマリ場を定義する。大域的共形変換$z\rightarrow w(z),\overline{z}\rightarrow \overline{w}(\overline{z})$の下で、場$\phi(x)$が次のように変換するとき、その場を準プライマリ場と呼ぶ。
 \begin{align}
     \phi'(w,\overline{w})=\qty(\dv{w}{z})^{-h}\qty(\dv{\overline{w}}{\overline{z}})^{-\overline{h}}\phi(z,\overline{z})
 \end{align}
 ここで、$h,\overline{h}$は場の共形次元と呼ばれる無次元数である。
-\\
+\blankline
 座標の無限小変換を次のように与える。
 \begin{align}
     z'&=z+\epsilon(z)\\
@@ -929,12 +930,12 @@ $[D\phi]$は可能なすべての場の配置にわたる積分を表してい�
     \delta_{\epsilon,\overline{\epsilon}} \phi(z,\overline{z}) &= \phi'(z,\overline{z}) - \phi(z,\overline{z})\\
     &= \phi'(z'-\epsilon(z),\overline{z}'-\overline{\epsilon}(\overline{z}) ) - \phi(z,\overline{z})\\
     &= -h\pdv{\epsilon(z)}{z}\phi(z,\overline{z}) - \overline{h}\pdv{\overline{\epsilon}(\overline{z})}{\overline{z}}\phi(z,\overline{z}) - \epsilon(z)\partial_z \phi(z,\overline{z}) - \overline{\epsilon}(\overline{z})\partial_{\overline{z}} \phi(z,\overline{z})\\
-    &=-(h\phi \partial_z \epsilon + \epsilon \partial_z \phi) - (\overline{h}\phi \partial_{\overline{z}} \overline{\epsilon} + \overline{\epsilon} \partial_{\overline{z}} \phi)\label{98}
+    &=-(h\phi \partial_z \epsilon + \epsilon \partial_z \phi) - (\overline{h}\phi \partial_{\overline{z}} \overline{\epsilon} + \overline{\epsilon} \partial_{\overline{z}} \phi)\label{primary variation}
 \end{align}
 プライマリ場は準プライマリ場のうち、任意の共形変換に対して上記の変換則を満たす場である。
 つまり、場の変分に影響するのは$\epsilon$の1次までである。逆に、そのような場をプライマリ場と呼ぶ。
 この定義よりプライマリ場は準プライマリ場の条件を満たす。しかし、その逆は成り立たない。
-\\
+\blankline
 \subsubsection{2点関数}
 次に準プライマリ場の相関関数にはその変換性より制約が課されることを確認する。
 並進対称性より、2点関数は座標の差の関数である。
@@ -945,14 +946,14 @@ $[D\phi]$は可能なすべての場の配置にわたる積分を表してい�
 このとき、2点関数は次のように変換する。
 \begin{align}
     \ev{\phi_1(\lambda z)\phi_2(\lambda w)}=&\lambda^{-h_1 - h_2}\lambda^{-\overline{h}_1 - \overline{h}_2}\ev{\phi_1(z)\phi_2(w)}\\
-    =&\lambda^{-h_1 - h_2}\lambda^{-\overline{h}_1 - \overline{h}_2}g(z-w)\label{101}
+    =&\lambda^{-h_1 - h_2}\lambda^{-\overline{h}_1 - \overline{h}_2}g(z-w)\label{2point scaling 1}
 \end{align}
 一方で、2点関数は次のようにも変換する。
 \begin{align}
     \ev{\phi_1(\lambda z)\phi_2(\lambda w)}=&g(\lambda z - \lambda w)\\
-    =&g(\lambda (z-w))\label{103}
+    =&g(\lambda (z-w))\label{2point scaling 2}
 \end{align}
-(\ref{101})式と(\ref{103})式を見比べ、これが任意の定数$\lambda$に対して成り立つためには、$g(z-w)$は次の形をとる必要がある。
+\eqref{2point scaling 1}式と\eqref{2point scaling 2}式を見比べ、これが任意の定数$\lambda$に対して成り立つためには、$g(z-w)$は次の形をとる必要がある。
 \begin{align}
     g(z-w)=\frac{C_{12}}{(z-w)^{h_1 + h_2}(\overline{z}-\overline{w})^{\overline{h}_1 + \overline{h}_2}}
 \end{align}
@@ -961,19 +962,19 @@ $[D\phi]$は可能なすべての場の配置にわたる積分を表してい�
 反転変換$z\rightarrow -\frac{1}{z},\omega\rightarrow -\frac{1}{\omega}$を考える。このとき、2点関数は次のように変換する。
 \begin{align}
     \ev{\phi_1\qty(-\frac{1}{z})\phi_2\qty(-\frac{1}{w})}=&\qty(\frac{1}{z^2})^{-h_1}\qty(\frac{1}{w^2})^{-h_2}\qty(\frac{1}{\overline{z}^2})^{-\overline{h}_1}\qty(\frac{1}{\overline{w}^2})^{-\overline{h}_2}\ev{\phi_1(z)\phi_2(w)}\\
-    =&\frac{(z)^{2h_1}(w)^{2h_2}(\overline{z})^{2\overline{h}_1}(\overline{w})^{2\overline{h}_2}C_{12}}{(z-w)^{h_1 + h_2}(\overline{z}-\overline{w})^{\overline{h}_1 + \overline{h}_2}}\label{106}
+    =&\frac{(z)^{2h_1}(w)^{2h_2}(\overline{z})^{2\overline{h}_1}(\overline{w})^{2\overline{h}_2}C_{12}}{(z-w)^{h_1 + h_2}(\overline{z}-\overline{w})^{\overline{h}_1 + \overline{h}_2}}\label{2point inversion 1}
 \end{align}
 一方で、2点関数は次のようにも変換する。
 \begin{align}
     \ev{\phi_1\qty(-\frac{1}{z})\phi_2\qty(-\frac{1}{w})}=&g\qty(-\frac{1}{z} + \frac{1}{w})\\
     =&g\qty(\frac{z-w}{zw})\\
     =&\frac{C_{12}}{(\frac{z-w}{zw})^{h_1 + h_2}(\frac{\overline{z}-\overline{w}}{\overline{z}\overline{w}})^{\overline{h}_1 + \overline{h}_2}}\\
-    =&\frac{(z)^{h_1 + h_2}(w)^{h_1 + h_2}(\overline{z})^{\overline{h}_1 + \overline{h}_2}(\overline{w})^{\overline{h}_1 + \overline{h}_2}C_{12}}{(z-w)^{h_1 + h_2}(\overline{z}-\overline{w})^{\overline{h}_1 + \overline{h}_2}}\label{110}
+    =&\frac{(z)^{h_1 + h_2}(w)^{h_1 + h_2}(\overline{z})^{\overline{h}_1 + \overline{h}_2}(\overline{w})^{\overline{h}_1 + \overline{h}_2}C_{12}}{(z-w)^{h_1 + h_2}(\overline{z}-\overline{w})^{\overline{h}_1 + \overline{h}_2}}\label{2point inversion 2}
 \end{align}
-(\ref{106})式と(\ref{110})式を見比べ、これが任意の$z,w$に対して成り立つためには、$h_1=h_2$かつ$\overline{h}_1=\overline{h}_2$が必要である。
+\eqref{2point inversion 1}式と\eqref{2point inversion 2}式を見比べ、これが任意の$z,w$に対して成り立つためには、$h_1=h_2$かつ$\overline{h}_1=\overline{h}_2$が必要である。
 したがって
 \begin{align}
-    \ev{\phi_1(z)\phi_2(w)}=&\frac{C_{12}}{(z-w)^{2h}(\overline{z}-\overline{w})^{2\overline{h}}}\label{111}
+    \ev{\phi_1(z)\phi_2(w)}=&\frac{C_{12}}{(z-w)^{2h}(\overline{z}-\overline{w})^{2\overline{h}}}\label{2point primary}
 \end{align}
 が成り立つ。
 \subsubsection{3点関数}
@@ -984,11 +985,11 @@ $[D\phi]$は可能なすべての場の配置にわたる積分を表してい�
     \end{align}
 ここで、$r_{ij}=x_i - x_j$と定義した。スケール変換$\lambda$の下で、3点関数は次のように変換する。
 \begin{align}
-    g(r_{12},r_{23},r_{31})&=\lambda^{-(h_1 + h_2 + h_3)}g(\lambda r_{12},\lambda r_{23},\lambda r_{31})\label{116}
+    g(r_{12},r_{23},r_{31})&=\lambda^{-(h_1 + h_2 + h_3)}g(\lambda r_{12},\lambda r_{23},\lambda r_{31})\label{3point scaling}
 \end{align}
-$\lambda r_{12}=r_{12}^0$とすると、(\ref{116})式は次のように書ける。
+$\lambda r_{12}=r_{12}^0$とすると、\eqref{3point scaling}式は次のように書ける。
 \begin{align}
-    g(r_{12},r_{23},r_{31})&=\frac{1}{(r_{12})^{h_1 + h_2 + h_3}}g\qty(r_{12}^0,\frac{r_{23}r_{12}^0}{r_{12}},\frac{r_{31}r_{12}^0}{r_{12}})\label{118}
+    g(r_{12},r_{23},r_{31})&=\frac{1}{(r_{12})^{h_1 + h_2 + h_3}}g\qty(r_{12}^0,\frac{r_{23}r_{12}^0}{r_{12}},\frac{r_{31}r_{12}^0}{r_{12}})\label{3point reduced}
 \end{align}
 右辺は$\frac{r_{23}}{r_{12}}$,$\frac{r_{31}}{r_{12}}$が十分小さい場合展開することが出来る。
 \begin{align}
@@ -1006,8 +1007,8 @@ $\lambda r_{12}=r_{12}^0$とすると、(\ref{116})式は次のように書け�
   \frac{C_{abc}}{r_{12}^a r_{23}^b r_{31}^c}=&\frac{C_{abc}}{r_{12}^{'a} r_{23}^{'b} r_{31}^{'c}\cdot (1-2b\cdot x_1 + b^2 x_1^2)^{h_1}(1-2b\cdot x_2 + b^2 x_2^2)^{h_2}(1-2b\cdot x_3 + b^2 x_3^2)^{h_3}}\label{a}\\
   =&\frac{C_{abc}}{r_{12}^{a} r_{23}^{b} r_{31}^{c}}\cdot\frac{\gamma_1^{\frac{a+c}{2}}\gamma_2^{\frac{a+b}{2}}\gamma_3^{\frac{b+c}{2}}}{\gamma_1^{h_1}\gamma_2^{h_2}\gamma_3^{h_3}}\label{b}
 \end{align}
-ここで、$\gamma_i=1-2b\cdot x_i + b^2 x_i^2$とした。(\ref{a})式から
-(\ref{b})式への変換は特殊共形変換が反転と平行移動を用いて表現されることを用いる。まず、反転変換$x^\mu \rightarrow \frac{x^\mu}{x^2}$の下での距離の変換を考える。
+ここで、$\gamma_i=1-2b\cdot x_i + b^2 x_i^2$とした。\eqref{a}式から
+\eqref{b}式への変換は特殊共形変換が反転と平行移動を用いて表現されることを用いる。まず、反転変換$x^\mu \rightarrow \frac{x^\mu}{x^2}$の下での距離の変換を考える。
 \begin{align}
     r_{ij}^{'2}=\qty(\frac{x_i^\mu}{x_i^2}-\frac{x_j^\mu}{x_j^2})^2=\frac{r_{ij}^2}{x_i^2 x_j^2}
 \end{align}
@@ -1024,7 +1025,7 @@ $\lambda r_{12}=r_{12}^0$とすると、(\ref{116})式は次のように書け�
     r_{ij}^{'''2}=\frac{r_{ij}^2}{x_i^2 x_j^2 \qty(\frac{x_i^\mu}{x_i^2}-b^\mu)^2\qty(\frac{x_j^\mu}{x_j^2}-b^\mu)^2}=\frac{r_{ij}^2}{(1-2b\cdot x_i + b^2 x_i^2)(1-2b\cdot x_j + b^2 x_j^2)}
 \end{align}
 以上より、\eqref{b}式の変換は特殊共形変換が反転と平行移動を用いて表現されることを用いていることが分かる。
-\\
+\blankline
 \eqref{b}式が任意の$b$に対して成り立つためには、次の関係式が成り立つ必要がある。
 %https://gemini.google.com/share/b225813d907f
 \begin{align}
@@ -1046,7 +1047,7 @@ $\lambda r_{12}=r_{12}^0$とすると、(\ref{116})式は次のように書け�
 \subsection{共形Ward-Takahashi恒等式}
 Ward-Takahashi恒等式を共形変換の場合に適用する。
 共形不変性の場合のカレントはエネルギー運動量テンソルを用いて
-(\ref{66})式は次のように表されていた。
+\eqref{current and T}式は次のように表されていた。
 このとき、共形Ward-Takahashi恒等式は次のようになる。
 \begin{align}
    \delta_{\epsilon}\ev{X}=\int_D d^dx \ \partial_\mu \ev{T^{\mu\nu}\epsilon_\nu (x)X}
@@ -1057,12 +1058,12 @@ $X$には場の積が入る。$D$は場の挿入点$x_i$を含む任意の領域
 $に注意する。
 \begin{align}
 \int_D d^2x \ \partial^\mu \langle T_{\mu\nu}\epsilon^\nu (x)X \rangle 
-&= \int_D d^2z \frac{i}{2} \qty(
+&= \int_D d^2z \frac{i}{2} \Big(
     \partial^z \langle T_{zz}\epsilon^z X \rangle 
-    + \partial^{\bar{z}} \langle T_{\bar{z}\bar{z}}\epsilon^{\bar{z}} X \rangle 
-    + \partial^z \langle T_{z\bar{z}}\epsilon^{\bar{z}} X \rangle 
+    + \partial^{\bar{z}} \langle T_{\bar{z}\bar{z}}\epsilon^{\bar{z}} X \rangle \notag\\
+&\hspace{6em} + \partial^z \langle T_{z\bar{z}}\epsilon^{\bar{z}} X \rangle 
     + \partial^{\bar{z}} \langle T_{\bar{z}z}\epsilon^z X \rangle
-)
+\Big)
 \end{align}
 ここで$\frac{\partial}{\partial z}=\frac{1}{2}\qty(\pdv{x^1}+\frac{1}{i}\pdv{x^2})$,$\frac{\partial}{\partial \overline{z}}=\frac{1}{2}\qty(\pdv{x^1}-\frac{1}{i}\pdv{x^2})$と書けることと、複素座標での計量に注意し、次のようにエネルギー運動量テンソルを表す。
 \begin{align}
@@ -1087,14 +1088,14 @@ $に注意する。
 \end{align}
 保存の式$\partial^\mu T_{\mu\nu}=0$より、$\partial^1T_{1z}+\partial^2T_{2z}=0$が成り立ち、これを変形すると$\partial^zT_{zz}=0$が成り立つ。これは計量をかけることにより$\partial_{\bar{z}}T_{zz}$と書けるので、$T_{zz}$は正則な場である。同様にして、$T_{\bar{z}\bar{z}}$は反正則な場である。ここで、複素の場合の計量は非対角成分のみが残っていることに注意すると、$T_{zz}$は正則な関数であり、$T_{\overline{z}\overline{z}}$は反正則な関数であることが分かる。
 ここで、複素の場合の計量は非対角成分のみが残っていることに注意すると、$T_{zz}$は正則な関数であり、$T_{\overline{z}\overline{z}}$は反正則な関数であることが分かる。
-\\
+\blankline
 $T=-2\pi T_{zz},\overline{T}=-2\pi T_{\overline{z}\overline{z}},\epsilon^z=\epsilon(z),\epsilon^{\overline{z}}=\overline{\epsilon}(\overline{z})$と定義すると、
 共形Ward-Takahashiの恒等式は次のように書ける。$T^{\bar{z}\bar{z}}\epsilon_{\overline{z}}=g^{\bar{z}z}T_{zz}\epsilon^z=2T_{zz}\epsilon^z$と変形することに注意する。
 \begin{align}
     \delta_{\epsilon,\overline{\epsilon}}\ev{X}=-\frac{1}{2\pi i}\oint_{\partial D} dz \ \epsilon(z) \ev{T(z)X} + \frac{1}{2\pi i}\oint_{\partial D} d\overline{z} \ \overline{\epsilon}(\overline{z}) \ev{\overline{T}(\overline{z})X}\label{conformal Ward takahashi}
 \end{align}
 $X$には場の積が入る。これをプライマリ場の場合に適用することを考えると、任意の局所的な共形変換に対する相関関数の変化の定義式と捉えることが出来る。それが共形Ward-Takahashiの恒等式である。
-\\
+\blankline
 
 簡単のためにここでは場が1つ挿入された場合について考えてみる。
 場が1つの場合は、積分領域$D$をいくらでも小さく取れるので、エネルギー運動量テンソルの位置$z$がプライマリ場の位置$z_1$に近づくときの特異的な振る舞いが積分に効いてくる。
@@ -1103,7 +1104,7 @@ $X$には場の積が入る。これをプライマリ場の場合に適用す�
     (\partial_{\omega_i}\epsilon(\omega_i))\phi_i(\omega_i,\overline{\omega}_i)=&\frac{1}{2\pi i}\oint_{C_i} dz \ \frac{\epsilon(z)}{(z-\omega_i)^2}\phi_i(\omega_i,\overline{\omega_i})\\
 \epsilon(\omega_i)(\partial_{\omega_i}\phi_i(\omega_i,\overline{\omega}_i))=&\frac{1}{2\pi i}\oint_{C_i} dz \ \frac{\epsilon(z)}{(z-\omega_i)}\partial_{\omega_i}\phi_i(\omega_i,\overline{\omega}_i)
 \end{align}
-これを用いることによりプライマリ場の無限小変換\eqref{98}式を次のように書き換える。holomorphic部分にのみ注目する。
+これを用いることによりプライマリ場の無限小変換\eqref{primary variation}式を次のように書き換える。holomorphic部分にのみ注目する。
 \begin{align}
     \delta_{\epsilon}\phi_i(\omega_i,\overline{\omega}_i)=&-\frac{1}{2\pi i}\oint_{C_i} dz \ \epsilon(z)\qty(\frac{h_i}{(z-\omega_i)^2}\phi_i(\omega_i,\overline{\omega}_i)+\frac{1}{z-\omega_i}\partial_{\omega_i}\phi_i(\omega_i,\overline{\omega}_i))
 \end{align}
@@ -1121,9 +1122,9 @@ $z$がプライマリ場の時空点$z_i$に近づくときの特異的な振る
 ここで$\sim$というのは、等式ではなく、特異的な振る舞いを示している。
 すなわち、正則な部分(特異性のない部分)は無視している。
 それらの寄与はWard-Takahashiの恒等式からは得ることができない。
-\\
+\blankline
 (追記)
-\\
+\blankline
 共形Ward-Takahashiの恒等式の拡張として、エネルギー運動量テンソルを2個挿入する場合を考える。
 相関関数にエネルギー運動量テンソルを含ませるためには、計量について汎函数微分を行う必要がある。
 \begin{align}
@@ -1166,8 +1167,8 @@ $c$はトレースアノマリーの大きさを表す量である。
 微分幾何の計算により、$R=4\partial_z^2 h$が得られる。
 \begin{note}
     クリストッフェル記号は $\Gamma \sim \tfrac12(\partial h + \partial h - \partial h)$ と $h$ の1次で、曲率は $R \sim \partial\Gamma + \Gamma\Gamma$ ですが、$\Gamma\Gamma$ は $h$ の2次なので落とせます。スカラー曲率は $h$ の1次で
-$$R = \partial_\mu\partial_\nu h^{\mu\nu} - \partial^2 h^\mu{}_\mu + O(h^2)$$
-となります。トレースは今回は消え、1項目のみが残り軽量の上げ下げを行えばよい。
+\[R = \partial_\mu\partial_\nu h^{\mu\nu} - \partial^2 h^\mu{}_\mu + O(h^2)\]
+となります。トレースは今回は消え、1項目のみが残り計量の上げ下げを行えばよい。
 \end{note}
 今回の計量の変分の取り方に対して、
 \begin{align}
@@ -1213,7 +1214,7 @@ $$R = \partial_\mu\partial_\nu h^{\mu\nu} - \partial^2 h^\mu{}_\mu + O(h^2)$$
 ミンコフスキー時空上の場の量子論において、時間と空間は計量の符号を通じて区別される。これに対し、2次元CFTではウィック回転によりユークリッド化された複素平面上で議論を展開することが多い。このとき、時間方向と空間方向は対等に扱われる。
 そのため、通常の時間順序を定義するのが困難になる。
 代わりに、動径量子化という方法を用いる。動径量子化では、時間方向を複素平面上の原点からの距離$r$で定義する。
-\\
+\blankline
 
 閉弦の場合を考える。閉弦の場合、空間方向は周期的である。一方、時間方向は円筒の高さの方向であり、無限に伸びている。
 これらを$\xi=t+ix$という変形により、複素平面上に写す。
@@ -1292,7 +1293,7 @@ $$R = \partial_\mu\partial_\nu h^{\mu\nu} - \partial^2 h^\mu{}_\mu + O(h^2)$$
     P=&i(L_0 - \overline{L}_0
     )
 \end{align}
-\\
+\blankline
 場の量子論における時間順序積に対応するものとして動径順序積を以下に定義する。
 \begin{align}
     \mathcal{R}\qty(\phi_1(z_1,\overline{z}_1)\phi_2(z_2,\overline{z}_2))=&
@@ -1310,10 +1311,11 @@ $A$という演算子は$a(z)$を固定した時間で周回積分したもの�
 \begin{align}
     A=\oint_{C_1} dz \ a(z)
 \end{align}
-である。式(\ref{p2})を図で表したものが図\ref{p3}である。
+である。式\eqref{p2}を図で表したものが図\ref{p3}である。
 
 \begin{figure}[htbp]
- \begin{tikzpicture}
+ \centering
+ \begin{tikzpicture}[scale=0.85]
   % --- スタイル定義（矢印の修正済み） ---
   \tikzset{midarrow/.style={
       decoration={markings, mark=at position 0.55 with {\arrow{stealth}}},
@@ -1425,25 +1427,25 @@ out状態のブラベクトルをこのエルミート共役を使って次の�
 \begin{align}
     \braket{\phi_{\text{out}}}{\phi_{\text{in}}}=&\lim_{z,\overline{z}\rightarrow 0}\bra{0}\phi^\dagger(z,\overline{z})\phi(0,0)\ket{0}\\
     =&\lim_{z,\overline{z}\rightarrow 0}\bra{0}(\overline{z})^{-2h}(z)^{-2\bar{h}} \phi(1/\overline{z},1/z)\phi(0,0)\ket{0}\\
-    =&\lim_{\xi,\overline{\xi}\rightarrow \infty}\bar{\xi}^{2h}\xi^{2\bar{h}}\bra{0}\phi(\bar{\xi},\xi)\phi(0,0)\ket{0}\label{162}
+    =&\lim_{\xi,\overline{\xi}\rightarrow \infty}\bar{\xi}^{2h}\xi^{2\bar{h}}\bra{0}\phi(\bar{\xi},\xi)\phi(0,0)\ket{0}\label{out state inner product}
 \end{align}
-2点関数の表式\ref{111}を用いると、これは$\xi$に依らない定数になることが分かる。
-\\
+2点関数の式\eqref{2point primary}を用いると、これは$\xi$に依らない定数になることが分かる。
+\blankline
 次に、場のモード展開を考える。ここでは場$\phi(z,\bar{z})$のべき展開をおこなう。
 \begin{align}
     \phi(z,\overline{z})=\sum_{m,n}\phi_{m,n}z^{-m-h}\overline{z}^{-n-\overline{h}}\label{phi expansion}
 \end{align}
 エルミート共役をとると次のようになる。
 \begin{align}
-    \phi^\dagger(z,\overline{z})=&\sum_{m,n}\phi_{m,n}^\dagger \bar{z}^{-m-h}z^{-n-\overline{h}}\label{168}
+    \phi^\dagger(z,\overline{z})=&\sum_{m,n}\phi_{m,n}^\dagger \bar{z}^{-m-h}z^{-n-\overline{h}}\label{phi dagger expansion}
 \end{align}
-ここで、(\ref{162})式より、次のように表示することもできる。
+ここで、\eqref{out state inner product}式より、次のように表示することもできる。
 \begin{align}
     \phi^\dagger(z,\overline{z})=&\overline{z}^{-2h}z^{-2\bar{h}}\sum_{m,n}\phi_{m,n}(1/\overline{z})^{-m-h}(1/z)^{-n-\overline{h}}\\
     =&\sum_{m,n}\phi_{m,n}\overline{z}^{m - h} z^{n - \overline{h}}\\
     =&\sum_{m,n}\phi_{-m,-n}z^{-n - \overline{h}}\overline{z}^{-m - h}
 \end{align}
-つまりこの式と(\ref{168})式を比較すると次の関係式が成り立つことが分かる。
+つまりこの式と\eqref{phi dagger expansion}式を比較すると次の関係式が成り立つことが分かる。
 \begin{align}
     \phi_{m,n}^\dagger=\phi_{-m,-n}
 \end{align}
@@ -1451,7 +1453,7 @@ out状態のブラベクトルをこのエルミート共役を使って次の�
 ヒルベルト空間における共形変換の生成子を考える。
 共形生成子のカレントは$T_{\mu\nu}\epsilon^{\nu}$という表式を持っていた。
 anti-holomorphic部分な部分を無視して、holomorphic部分のみを考える。
-このとき、共形変換に対する保存電荷は共形Ward-Takahashiの恒等式(\ref{conformal Ward takahashi})より次のように書ける。
+このとき、共形変換に対する保存電荷は共形Ward-Takahashiの恒等式\eqref{conformal Ward takahashi}より次のように書ける。
 \begin{align}
     Q_{\epsilon}=&\frac{1}{2\pi i}\oint dz \ \epsilon(z) T(z)
 \end{align}
@@ -1460,19 +1462,19 @@ anti-holomorphic部分な部分を無視して、holomorphic部分のみを考�
     [Q_{\epsilon},\phi(w,\overline{w})]=&\frac{1}{2\pi i}\oint_{w} dz \ \epsilon(z) \ev{T(z)\phi(w,\overline{w})}\notag\\
     =&\frac{1}{2\pi i}\oint_{w} dz \ \epsilon(z) \qty(\frac{h}{(z-w)^2}+\frac{1}{z-w}\partial_w)\phi(w,\overline{w})\notag\\
     =&\epsilon(w)\partial_w \phi(w,\overline{w})+h(\partial_w \epsilon(w))\phi(w,\overline{w})\notag\\
-    =&-\delta_{\epsilon}\phi(w,\overline{w})\ \ (\because\ (\ref{98}))
+    =&-\delta_{\epsilon}\phi(w,\overline{w})\ \ (\because\ \eqref{primary variation})
 \end{align}
 したがって、$Q_{\epsilon}$は共形変換の生成子であることが分かる。
-\\
+\blankline
 次にエネルギー運動量テンソルのモード展開を考える。
 \begin{align}
-    T(z)=\sum_{n}L_n z^{-n-2}\label{178}
+    T(z)=\sum_{n}L_n z^{-n-2}\label{T mode expansion}
 \end{align}
 このとき、$L_n$は次のように定義されている。
 \begin{align}
-    L_n=&\frac{1}{2\pi i}\oint dz \ z^{n+1} T(z)\label{179}
+    L_n=&\frac{1}{2\pi i}\oint dz \ z^{n+1} T(z)\label{Ln definition}
 \end{align}
-この表式になることを確かめるために(\ref{178})式を(\ref{179})式に代入すると
+この表式になることを確かめるために\eqref{T mode expansion}式を\eqref{Ln definition}式に代入すると
 次のようになる。
 \begin{align}
       L_n=&\frac{1}{2\pi i}\oint dz \ z^{n+1} \sum_{m}L_m z^{-m-2}\\
@@ -1481,7 +1483,7 @@ anti-holomorphic部分な部分を無視して、holomorphic部分のみを考�
         =&L_n
 \end{align}
 したがって、$L_n$の表式の十分性が確かめられた。
-\\
+\blankline
 同様に$\epsilon(z)$のモード展開を考える。
 \begin{align}
     \epsilon(z)=&\sum_{n}\epsilon_n z^{n+1}
@@ -1493,7 +1495,7 @@ anti-holomorphic部分な部分を無視して、holomorphic部分のみを考�
 \end{align}
 2つ目の等号はコーシーの積分定理より$-1$乗の項のみが寄与する。
 したがって、$L_n$とanti-holomorphic部分の$\overline{L}_n$によりヒルベルト空間における共形変換の生成子を表すが出来る。
-\\
+\blankline
 $L_n$と$L_m$の交換関係を求める
 。\footnote{
     エネルギー運動量テンソル2つの積のOPEは中心電荷cを用いて
@@ -1523,7 +1525,7 @@ $L_n$と$L_m$の交換関係を求める
 を考えた時、始状態で特異的な振る舞いを持たないことが要求される。つまり、$z,\bar{z}\rightarrow0$で特異性を持たないために
 真空状態に対して次の条件が成り立つ。
 \begin{align}
-    L_n\ket{0}=&0 \ (n\geq -1) \ \ (\because \ref{178})  \\
+    L_n\ket{0}=&0 \ (n\geq -1) \ \ (\because \eqref{T mode expansion})  \\
     \overline{L}_n\ket{0}=&0 \ (n\geq -1)
 \end{align}
 漸近状態はプライマリ場の挿入により得られる。
@@ -1535,13 +1537,13 @@ $L_n$と$L_m$の交換関係を求める
 ビラソロ代数の生成子とプライマリ場との交換関係を計算すると次のようになる。
 \begin{align}
     [L_n,\phi(z,\overline{z})]=&\frac{1}{2\pi i}\oint_{z}d\omega \ \omega^{n+1} T(\omega)\phi(z,\overline{z})\\
-    =&\frac{1}{2\pi i}\oint_{z}d\omega \ \omega^{n+1}\qty(\frac{h}{(\omega - z)^2}+\frac{1}{\omega - z}\partial_z)\phi(z,\overline{z})\ \ (\because\ref{OPE of T and phi })\\
+    =&\frac{1}{2\pi i}\oint_{z}d\omega \ \omega^{n+1}\qty(\frac{h}{(\omega - z)^2}+\frac{1}{\omega - z}\partial_z)\phi(z,\overline{z})\ \ (\because\eqref{OPE of T and phi })\\
     =&h(n+1)z^n \phi(z,\overline{z})+z^{n+1}\partial_z \phi(z,\overline{z})   \label{commutator of L and phi} 
   \end{align}
     したがって、原点におけるプライマリ場の挿入により得られる始状態に対して次の関係式が成り立つ。
 \begin{align}
     L_0\ket{h,\bar{h}}=&(L_0\phi(0,0)-\phi(0,0)L_0)\ket{0}\\
-    =&h\ket{h,\bar{h}} \ \ (\because\ref{commutator of L and phi} \text{式の$n=0$の場合})
+    =&h\ket{h,\bar{h}} \ \ (\because\eqref{commutator of L and phi} \text{式の$n=0$の場合})
 \end{align}
 同様にantiholomorphic部分についても次の関係式が成り立つ。
 \begin{align}
@@ -1564,7 +1566,7 @@ $L_n$と$L_m$の交換関係を求める
 が成り立つことを用いた。この式はビラソロ代数の生成子を連続的に作用させることにより、より大きい共形次元の状態を作り出せることを意味している。
 これを繰り返すことにより、無限に多くの状態を作り出せる。
 このようにして作り出される状態全体の空間をバーマ加群と呼ぶ。
-\\
+\blankline
 以上の構成法で生成できる状態は一般に次のように表される。
 \begin{align}
     L_{\lambda}\ket{h}\equiv L_{-\lambda_1}L_{-\lambda_2}\cdots L_{-\lambda_k}\ket{h}\ \ \ (\lambda=(\lambda_1,\lambda_2,\cdots,\lambda_k),\ \lambda_1\geq \lambda_2\geq \cdots \geq \lambda_k>0)
@@ -1581,13 +1583,13 @@ $L_n$と$L_m$の交換関係を求める
 \end{align}
 これらを用いて、内積を書き換える。まず、次のビラソロ代数の生成子の関係を確認する。
 \begin{align}
-    (L_n)^\dagger=&L_{-n}\label{209}
+    (L_n)^\dagger=&L_{-n}\label{L dagger}
 \end{align}
 これを確認するために、エネルギー運動量テンソルのエルミート共役を考える。
 \begin{align}
     T^\dagger(z,\overline{z})=&\sum_{n}L_n^\dagger \overline{z}^{-n-2}\notag
 \end{align}
-一方、(\ref{hermite})式より\footnote{
+一方、\eqref{hermite}式より\footnote{
     エネルギー運動量テンソルとは共形次元が(2,0)の準プライマリ場であることに注意する。この共形次元を持つことはエネルギー運動量テンソル同士のOPEを計算すれば分かる。
 }
 \begin{align}
@@ -1595,7 +1597,7 @@ $L_n$と$L_m$の交換関係を求める
     =&(\overline{z})^{-4}\sum_{n}L_{-n} \overline{z}^{n+2}\notag\\
     =&\sum_{n}L_{-n} \overline{z}^{-n-2}
 \end{align}
-従って(\ref{209})式が成り立つことが分かる。
+従って\eqref{L dagger}式が成り立つことが分かる。
 \\これを用いて、双対ベクトルに対して次が成り立つことが分かる。
 \begin{align}
     \bra{h}L_j=0 \ (j>0)\\
@@ -1606,8 +1608,8 @@ $L_n$と$L_m$の交換関係を求める
     =&\bra{h}L_{\mu_k}\cdots L_{\mu_2}L_{\mu_1}L_{-\lambda_1}L_{-\lambda_2}\cdots L_{-\lambda_l}\ket{h}
 \end{align}
 このようにして、内積は最終的に$\bra{h}L_{-n}L_n\ket{h}$の形に帰着される。
-これはビラソロ代数の交換関係(\ref{virasoro algebra})式を用いることにより評価することが出来る。
-\\
+これはビラソロ代数の交換関係\eqref{virasoro algebra}式を用いることにより評価することが出来る。
+\blankline
 
 ユニタリな表現を考えるとき、内積が正定値であることが要求される。
 この条件を満たすためには、共形次元$h,\bar{h}$と中心電荷$c$に制限が課される。
@@ -1617,7 +1619,7 @@ $L_{-1}\ket{\psi}$のノルムを計算する。
     =&2h \braket{\psi}
 \end{align}
 これが0以上であるためには$h\geq 0$である必要がある。
-\\
+\blankline
 次に$L_{-n}\ket{0}$のノルムを計算する。
 \begin{align}
     |L_{-n}\ket{0}|^2=\bra{0}L_n L_{-n}\ket{0}=&\bra{0}[L_n,L_{-n}]\ket{0}\notag\\
@@ -1664,7 +1666,7 @@ $\phi$がプライマリ場であることに注意すると\eqref{OPE of T and 
     \bm{1}^{(-2)}(w)=\frac{1}{2\pi i}\oint dz \ T(z)\frac{1}{z-w}=\ T(w)
 \end{align}
 となる。したがって、エネルギー運動量テンソル$T(z)$は恒等場のレベル2のディセンダント場である。
-\\
+\blankline
 
 一般のディセンダント場も構成することが出来る。
 ディセンダント状態$L_{-m}L_{-n}\ket{h}$に対してはディセンダント場$\phi^{(-m,-n)}$を次のように定義する。
@@ -1673,30 +1675,34 @@ $\phi$がプライマリ場であることに注意すると\eqref{OPE of T and 
 \end{align}
 より一般のディセンダント場も同様にして定義できる。
 \begin{align}
-    L_{-k_1}\cdots L_{-k_j}\ket{h}=&\lim_{w\rightarrow 0}\phi^{(-k_1,\cdots,-k_j)}(w)\ket{0}\leftrightarrow \phi^{(-k_1,\cdots,-k_j)}(w)\notag\\&\hspace{4cm}
+    L_{-k_1}\cdots L_{-k_j}\ket{h}=&\lim_{w\rightarrow 0}\phi^{(-k_1,\cdots,-k_j)}(w)\ket{0}\leftrightarrow \phi^{(-k_1,\cdots,-k_j)}(w)\notag\\&\hspace{3cm}
     =\frac{1}{2\pi i}\oint dz \ (z-w)^{-k_1+1}T(z)\phi^{(-k_2,\cdots,-k_j)}(w)
 \end{align}
 この様にして構成される場の全体を共形族と呼び、$[\phi]$のように記述することにする。
-\\
+\blankline
 ここまではプライマリ場の相関関数について考えてきたが、これからはディセンダント場$\phi^{(-k)}(w)$を1つ含むような相関関数について考える。
 ディセンダント場を1つ含む相関関数は
 \begin{align}
-    \ev{\phi^{(-k)}(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}=&\frac{1}{2\pi i}\oint_w dz \ (z-w)^{-k+1}\ev{T(z)\phi(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}
+    &\ev{\phi^{(-k)}(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}\notag\\
+    &=\frac{1}{2\pi i}\oint_w dz \ (z-w)^{-k+1}\ev{T(z)\phi(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}
 \end{align}
 と書ける。ここで、
 積分路は$z=w$のみを含み、他の点$z_j$を含まないように選ぶ。この積分路を変形して、$w$を含まず、その他の各座標
 $z_j$をとり囲んだ積分路の和にする。
 \begin{align}
-    \ev{\phi^{(-k)}(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}=&-\sum_{j=1}^{n}\frac{1}{2\pi i}\oint_{z_j} dz \ (z-w)^{-k+1}\ev{T(z)\phi(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}
+    &\ev{\phi^{(-k)}(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}\notag\\
+    &=-\sum_{j=1}^{n}\frac{1}{2\pi i}\oint_{z_j} dz \ (z-w)^{-k+1}\ev{T(z)\phi(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}
 \end{align}
 ここで$T(z)$と$\phi_j(z_j)$とのOPEを用いて次のように書き換える。
 \begin{align}
-    \ev{\phi^{(-k)}(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}=&-\sum_{j=1}^{n}\frac{1}{2\pi i}\oint_{z_j} dz \ (z-z_j+z_j-w)^{-k+1}\qty(\frac{h_j}{(z-z_j)^2}+\frac{1}{z-z_j}\partial_{z_j})\nonumber\\
+    &\ev{\phi^{(-k)}(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}\notag\\
+    &=-\sum_{j=1}^{n}\frac{1}{2\pi i}\oint_{z_j} dz \ (z-z_j+z_j-w)^{-k+1}\qty(\frac{h_j}{(z-z_j)^2}+\frac{1}{z-z_j}\partial_{z_j})\nonumber\\
     &\times \ev{\phi(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}\notag\\
-    =&\sum_{j=1}^n\frac{1}{2\pi i} \oint_{z_j} dz \ \qty(\frac{(k-1)h_j}{(z-z_j)(z_j-w)^k}-\frac{1}{(z-w)^{k-1}(z_i-z_j)}\partial_{z_j})\nonumber\\
+    &=\sum_{j=1}^n\frac{1}{2\pi i} \oint_{z_j} dz \ \qty(\frac{(k-1)h_j}{(z-z_j)(z_j-w)^k}-\frac{1}{(z-w)^{k-1}(z_i-z_j)}\partial_{z_j})\nonumber\\
     &\times \ev{\phi(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}\nonumber \\
     &\hspace{10mm} \qty(\because\text{二項定理} \binom{-k+1}{m}=(-1)^m\binom{k-1+m}{m})\notag\\
-    =&\sum_{j=1}^{n}\qty(\frac{(k-1)h_j}{(z_j - w)^k} - \frac{1}{(z_j - w)^{k-1}}\partial_{z_j})\ev{\phi(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}\label{descendant eq}
+    &=\sum_{j=1}^{n}\qty(\frac{(k-1)h_j}{(z_j - w)^k} - \frac{1}{(z_j - w)^{k-1}}\partial_{z_j})\notag\\
+    &\qquad\times\ev{\phi(w)\phi_1(z_1,\overline{z}_1)\cdots \phi_n(z_n,\overline{z}_n)}\label{descendant eq}
 \end{align}
 ここで微分演算子$\mathcal{L}_{-k}$を次のように定義する。
 \begin{align}
@@ -1725,7 +1731,7 @@ $J(x)$は外部ソースである。この生成汎関数を用いると、2点�
 \end{align}
 2点関数を計算するために、作用積分として次のような表式を仮定する。
 \begin{align}
-    S[\phi]=&\int d^dx d^dy \ \qty(\frac{1}{2}\phi(x)A(x,y)\phi(y) )\label{234}
+    S[\phi]=&\int d^dx d^dy \ \qty(\frac{1}{2}\phi(x)A(x,y)\phi(y) )\label{free action}
 \end{align}
 $A$は$x,y$の関数である。
 このときの経路積分\eqref{generating}式のの中の指数関数の中身は次のように書ける。
@@ -1747,11 +1753,11 @@ $\phi\rightarrow\phi+\phi_0$という変数変換を考える。このとき、�
     -S[\phi]+\int d^dx \ J(x)\phi(x)=&\frac{-1}{2}\int d^dx d^dy \ \phi(x)A(x,y)\phi(y) \notag\\
     &+\frac{-1}{2}\int d^dx d^dy \ \phi_0(x)A(x,y)\phi_0(y) + \int d^dx \ J(x)\phi_0(x)\nonumber
     \\
-    =&\frac{-1}{2}\int d^dx d^dy \ \phi(x)A(x,y)\phi(y) 
-    +\frac{1}{2}\int d^dx d^dy \ J(x)A^{-1}(x,y)J(y)
+    =&\frac{-1}{2}\int d^dx d^dy \ \phi(x)A(x,y)\phi(y) \notag\\
+    &+\frac{1}{2}\int d^dx d^dy \ J(x)A^{-1}(x,y)J(y)
 \end{align}
 と書ける。
-(\ref{2point})式により、次のように2点関数が書ける。
+\eqref{2point}式により、次のように2点関数が書ける。
 \begin{align}
     \ev{\mathcal{T}(\phi(x_1)\phi(x_2))}=&A^{-1}(x_1,x_2)
 \end{align}
@@ -1760,7 +1766,7 @@ $\phi\rightarrow\phi+\phi_0$という変数変換を考える。このとき、�
 \begin{align}
     S[\phi]=&\frac{1}{8\pi}\int d^2x \ \partial_{\mu}\phi \partial^{\mu}\phi\label{free boson}
 \end{align}
-このとき(\ref{234})式と見比べ部分積分をすることにより、関数$A(x,y)$
+このとき\eqref{free action}式と見比べ部分積分をすることにより、関数$A(x,y)$
 は次の表式で与えられる。
 \begin{align}
     A(x,y)=&-\frac{1}{4\pi}\square\delta^{(2)} (x-y)
@@ -1774,7 +1780,7 @@ $\phi\rightarrow\phi+\phi_0$という変数変換を考える。このとき、�
 -\frac{1}{4\pi}\partial^2 K(x,y)=&\delta^{(2)}(x-y)
 \end{align}
 つまり、2点関数はこの方程式のグリーン関数であることが分かる。
-\\
+\blankline
 点$y$を中心とする半径$R$の円の領域で積分すると
 次のように変形される。
 \begin{align}
@@ -1800,7 +1806,7 @@ $K(x,y)\equiv K(\rho),\rho=|x-y|$としてガウスの発散定理を用いる�
 \subsection{Wickの定理}
 前節では2点関数について扱っていたが、ここでは一般の$n$点関数について考える。
 そのために、Wickの定理を紹介する。
-\\
+\blankline
 
 場の量子論では、自由場の場の演算子を生成演算子と消滅演算子に分解する。
 \begin{align}
@@ -1834,10 +1840,11 @@ Wickの定理は異なる点の時間順序積に対して、
 \begin{align}
     \mathcal{T}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4)=&:\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4):\notag\\
     &+:\contraction{}{\phi}{(x_1)}{\phi}\phi(x_1)\phi(x_2):\phi(x_3)\phi(x_4):+\contraction{}{\phi}{(x_1)\phi(x_2)\phi(x_3)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4):\notag\\
-    &+:\contraction{\phi(x_1)}{\phi}{(x_2)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4):+\contraction{\phi(x_2)}{\phi}{(x_2)\phi(x_3)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4) +\contraction{\phi(x_1)\phi(x_2)}{\phi}{(x_3)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4)\notag\\
+    &+:\contraction{\phi(x_1)}{\phi}{(x_2)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4):+:\contraction{\phi(x_1)}{\phi}{(x_2)\phi(x_3)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4):\notag\\
+    &+:\contraction{\phi(x_1)\phi(x_2)}{\phi}{(x_3)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4):\notag\\
     & +:\contraction{}{\phi}{(x_1)\phi(x_2)}{\phi}\contraction[2ex]{\phi(x_1)}{\phi}{(x_2)\phi(x_3)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4):\notag\\
-    &+:\contraction{}{\phi}{(x_1)}{\phi}\contraction[2ex]{\phi(x_1)\phi(x_2)}{\phi}{(x_3)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4):
-    +:\contraction{}{\phi}{(x_1)\phi(x_2)\phi(x_3)}{\phi}\contraction[2ex]{\phi(x_1)}{\phi}{(x_2)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4):
+    &+:\contraction{}{\phi}{(x_1)}{\phi}\contraction[2ex]{\phi(x_1)\phi(x_2)}{\phi}{(x_3)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4):\notag\\
+    &+:\contraction{}{\phi}{(x_1)\phi(x_2)\phi(x_3)}{\phi}\contraction[2ex]{\phi(x_1)}{\phi}{(x_2)}{\phi}\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4):
 \end{align}
 と表される。
 \subsection{自由ボソンにおける演算子積展開}
@@ -1853,7 +1860,7 @@ $\partial_z=\frac{1}{2}(\partial_1 - i \partial_2)$, $\partial_{\overline{z}}=\f
     \partial_z \partial_{\overline{z}}\phi(z,\overline{z})=0
 \end{align}
 これが意味することは、$\partial_z \phi(z,\overline{z})$は$\overline{z}$に依存しない関数であり、$\partial_{\overline{z}} \phi(z,\overline{z})$は$z$に依存しない関数であるということである。
-次にエネルギー運動量テンソルを考える。(\ref{energy momentum tensor})式より次のように与えられる。
+次にエネルギー運動量テンソルを考える。\eqref{energy momentum tensor}式より次のように与えられる。
 \begin{align}
     T_{\mu\nu}=&-\eta_{\mu\nu}\qty(\frac{1}{8\pi}\partial_{\alpha}\phi \partial^{\alpha}\phi) + \frac{1}{4\pi}\partial_{\mu}\phi \partial_{\nu}\phi\\
     =&\frac{1}{4\pi}\qty(\partial_{\mu}\phi \partial_{\nu}\phi - \frac{1}{2}\eta_{\mu\nu}\partial_{\alpha}\phi \partial^{\alpha}\phi)
@@ -1883,7 +1890,7 @@ $\partial_z=\frac{1}{2}(\partial_1 - i \partial_2)$, $\partial_{\overline{z}}=\f
     \partial_z \phi(z)\partial_w \phi(w)\sim& -\frac{1}{(z-w)^2} 
 \end{align}
 ここで、$\sim$は等式ではなく、特異性のみを示していることに注意する。
-\\
+\blankline
 $T(z)$と$\partial \phi$のOPEを計算する。
 \begin{align}
     T(z)\partial_w \phi(w)=&-\frac{1}{2}:\partial_z \phi(z)\partial_z \phi(z):\partial_w \phi(w)\\
@@ -1894,7 +1901,7 @@ $\partial \phi(z)$を$w$の周りで展開すると、次のようになる。
 \begin{align}
    T(z)\partial_w \phi(w)\sim& \frac{1}{(z-w)^2}\partial_w \phi(w) + \frac{1}{(z-w)}\partial_w^2 \phi(w) \\
 \end{align}
-これを(\ref{OPE of T and phi })式と見比べることにより$\partial \phi(z)$は共形次元が1のプライマリ場であることが分かる。
+これを\eqref{OPE of T and phi }式と見比べることにより$\partial \phi(z)$は共形次元が1のプライマリ場であることが分かる。
 Wickの定理により、エネルギー運動量テンソル同士のOPEも計算できる。
 \begin{align}
     T(z)T(w)=&\frac{1}{4}:\partial_z \phi(z)\partial_z \phi(z): :\partial_w \phi(w)\partial_w \phi(w):\\
@@ -1914,20 +1921,20 @@ N個の自由ボソン場の系では、中心電荷は$c=N$となり、N個の�
 ここで、$T(z)$がボーズ統計性を持つため、
 $    T(z)T(w)    =T(w)T(z)$
 を満たす。これを用いると、$\mathcal{A}_4(w)$は定数であり、$\mathcal{A}_3(w)$は0であることが分かる。
-    したがって、エネルギー運動量テンソル同士のOPEは(\ref{OPE of T and T})式の形になることが分かる。
+    したがって、エネルギー運動量テンソル同士のOPEは\eqref{OPE of T and T}式の形になることが分かる。
 }
-\\
+\blankline
 
 エネルギー運動量テンソルがプライマリ場でないことを確かめる。
-共形Ward-Takahashiの恒等式(\ref{conformal Ward takahashi})式を用いると次のようになる。
+共形Ward-Takahashiの恒等式\eqref{conformal Ward takahashi}式を用いると次のようになる。
 \begin{align}
     \delta_{\epsilon,\overline{\epsilon}} T(w)=&\frac{1}{2\pi i}\oint_{w} dz \ \epsilon(z) T(z)T(w)\\
     =&\frac{1}{2\pi i}\oint_{w} dz \ \epsilon(z)\qty(\frac{c/2}{(z-w)^4} + \frac{2}{(z-w)^2}T(w) + \frac{1}{(z-w)}\partial_w T(w))\\
     =&\frac{c}{12}\partial_w^3 \epsilon(w) + 2 \partial_w \epsilon(w) T(w) + \epsilon(w)\partial_w T(w)\label{infty energy momentum}
 \end{align}
-(\ref{98})式と比べると、3次の微分項が余分に存在していることが分かる。
+\eqref{primary variation}式と比べると、3次の微分項が余分に存在していることが分かる。
 したがって、エネルギー運動量テンソルはプライマリ場ではない。大域的な共形変換に対しては、$\epsilon$が高々2次の多項式であるため、この余分な項は消える。
-\\
+\blankline
 有限変換$z\rightarrow w(z)$に対するエネルギー運動量テンソルの変換則は
 \begin{align}
     \widetilde{T}(w)=&\qty(\frac{dw}{dz})^{-2}\qty[T(z) - \frac{c}{12}S(w,z)]\label{energy momentum trans}
@@ -1944,13 +1951,13 @@ $    T(z)T(w)    =T(w)T(z)$
     \qty(\frac{dw}{dz})^{-2}=&1 - 2\partial_z \epsilon(z)\\
     S(w,z)=& \partial_z^3 \epsilon(z)-\frac{3}{2}(\partial_z^2 \epsilon(z))^2
 \end{align}
-これを(\ref{energy momentum trans})式に代入すると次のようになる。
+これを\eqref{energy momentum trans}式に代入すると次のようになる。
 \begin{align}
     \widetilde{T}(w)=&\qty(1 - 2\partial_z \epsilon(z))\qty[T(z) - \frac{c}{12}\qty(\partial_z^3 \epsilon(z)-\frac{3}{2}(\partial_z^2 \epsilon(z))^2)]\\
     =&T(z) - 2\partial_z \epsilon(z) T(z) - \frac{c}{12}\partial_z^3 \epsilon(z) + \mathcal{O}(\epsilon^2)
 \end{align}
-したがって、(\ref{infty energy momentum})の表式と合うことが分かる。
-\\
+したがって、\eqref{infty energy momentum}の表式と合うことが分かる。
+\blankline
 
 次に群構造が成り立つことを確かめる。
 2回の変換$z\rightarrow w(z)\rightarrow v(w)$を考える。
@@ -2015,7 +2022,7 @@ $\varphi$が円筒上で定義されているという事は次の周期的境�
     [\varphi_{\text{cyc}}(x,t),\varphi_{\text{cyc}}(y,t)]=&0\label{commutation relation 2}\\
     [\Pi_{\text{cyc}}(x,t),\Pi_{\text{cyc}}(y,t)]=&0\label{commutation relation 3}
 \end{align}
-特に(\ref{commutation relation})式に場のモード展開を代入すると次のようになる。
+特に\eqref{commutation relation}式に場のモード展開を代入すると次のようになる。
 \begin{align}
     &\Bigg[\varphi_0+\frac{4\pi}{l}\pi_0 t+i\sum_{n\neq 0}\frac{1}{n}\qty(a_n e^{-i\frac{2\pi}{l}n(t-x)} + \overline{a}_n e^{-i\frac{2\pi}{l}n(t+x)})\\
     &\ \ \ \ \ \ , \frac{1}{4\pi}\qty(\frac{4\pi}{l}\pi_0 + \sum_{m\neq 0}\qty(\frac{2\pi}{l}a_m e^{-i\frac{2\pi}{l}m(t-y)}  +\frac{2\pi }{l}\overline{a}_m e^{-i\frac{2\pi}{l}m(t+y)}))\Bigg]\nonumber
@@ -2025,8 +2032,8 @@ $\varphi$が円筒上で定義されているという事は次の周期的境�
 つまり、$x$で積分すればよい。
 \begin{align}
     &\int_0^l dx \ e^{i\frac{2\pi}{l}p x}\Bigg[\varphi_0+\frac{4\pi}{l}\pi_0 t+i\sum_{n\neq 0}\frac{1}{n}\qty(a_n e^{-i\frac{2\pi}{l}n(t-x)} + \overline{a}_n e^{-i\frac{2\pi}{l}n(t+x)})\\
-    &\ \ \ \ \ \ , \frac{1}{4\pi}\qty(\frac{4\pi}{l}\pi_0 + \sum_{m\neq 0}\qty(\frac{2\pi}{l}a_m e^{-i\frac{2\pi}{l}m(t-y)}  +\frac{2\pi }{l}\overline{a}_m e^{-i\frac{2\pi}{l}m(t+y)}))\Bigg]\nonumber
-    =i\int_0^l dx \ e^{i\frac{2\pi}{l}p x}\delta(x-y)\nonumber
+    &\ \ \ \ \ \ , \frac{1}{4\pi}\qty(\frac{4\pi}{l}\pi_0 + \sum_{m\neq 0}\qty(\frac{2\pi}{l}a_m e^{-i\frac{2\pi}{l}m(t-y)}  +\frac{2\pi }{l}\overline{a}_m e^{-i\frac{2\pi}{l}m(t+y)}))\Bigg]\nonumber\\
+    &=i\int_0^l dx \ e^{i\frac{2\pi}{l}p x}\delta(x-y)\nonumber
 \end{align}
 $p=0$のとき、指数の部分が消えるので、次のようになる。
 \begin{align}
@@ -2034,7 +2041,8 @@ $p=0$のとき、指数の部分が消えるので、次のようになる。
 \end{align}
 次に振動項を見るために、$p\neq 0$のときを考える。
 \begin{align}
-    &\int_0^l dx \ e^{i\frac{2\pi}{l}p x}\Bigg[i\sum_{n\neq 0}\frac{1}{n}\qty(a_n e^{-i\frac{2\pi}{l}n(t-x)} + \overline{a}_n e^{-i\frac{2\pi}{l}n(t+x)}) , \frac{1}{4\pi}\sum_{m\neq 0}\qty(\frac{2\pi}{l}a_m e^{-i\frac{2\pi}{l}m(t-y)}  +\frac{2\pi }{l}\overline{a}_m e^{-i\frac{2\pi}{l}m(t+y)})\Bigg]\nonumber\\
+    &\int_0^l dx \ e^{i\frac{2\pi}{l}p x}\Bigg[i\sum_{n\neq 0}\frac{1}{n}\qty(a_n e^{-i\frac{2\pi}{l}n(t-x)} + \overline{a}_n e^{-i\frac{2\pi}{l}n(t+x)}) ,\nonumber\\
+    &\hspace{8em} \frac{1}{4\pi}\sum_{m\neq 0}\qty(\frac{2\pi}{l}a_m e^{-i\frac{2\pi}{l}m(t-y)}  +\frac{2\pi }{l}\overline{a}_m e^{-i\frac{2\pi}{l}m(t+y)})\Bigg]\nonumber\\
     =&i\int_0^l dx \ e^{i\frac{2\pi}{l}p x}\delta(x-y)\\
     &\int_0^l dx \ e^{i\frac{2\pi}{l}p x}\Bigg[i\sum_{n\neq 0}\frac{1}{n} a_n e^{-i\frac{2\pi}{l}n(t-x)} ,\frac{2\pi}{l} \frac{1}{4\pi}\sum_{m\neq 0} a_m e^{-i\frac{2\pi}{l}m(t-y)}\Bigg]\nonumber\\
     &+\int_0^l dx \ e^{i\frac{2\pi}{l}p x}\Bigg[i\sum_{n\neq 0}\frac{1}{n} \overline{a}_n e^{-i\frac{2\pi}{l}n(t+x)} , \frac{2\pi}{l}\frac{1}{4\pi}\sum_{m\neq 0} \overline{a}_m e^{-i\frac{2\pi}{l}m(t+y)}\Bigg]\nonumber\\
@@ -2105,7 +2113,7 @@ $w\sim w+l $という同一視をしている。
     z^{-n-1}
 \end{align}
 ここで$a_0\equiv \overline{a}_0\equiv \pi_0$とした。
-ここで、(\ref{phi expansion})式と比較すると、$\partial \varphi$は$h=1$のプライマリ場であることが分かる。\footnote{
+ここで、\eqref{phi expansion}式と比較すると、$\partial \varphi$は$h=1$のプライマリ場であることが分かる。\footnote{
     これを結論づけるためには$\phi_{m,n}^\dagger=\phi_{-m,-n}$が成り立っていたのと同様に$a_n^\dagger=a_{-n}$が成り立ってていて欲しい。
         実際に、$\varphi^\dagger$が$\varphi(z,\overline{z})$と等しいためには、$a_n^\dagger=a_{-n},\overline{a}_n^\dagger=\overline{a}_{-n}$が成り立つ必要がある。
 }
@@ -2125,7 +2133,7 @@ $w\sim w+l $という同一視をしている。
 \begin{align}
     \ev{\partial_z \varphi(z)\partial_w\varphi(w)}=& -\frac{1}{(z-w)^2}
 \end{align}
-エネルギー運動量テンソルは(\ref{energy momentum tensor})式より次のようになる。
+エネルギー運動量テンソルは\eqref{energy momentum tensor}式より次のようになる。
 \begin{align}
     T(z)=&- \frac{1}{2}:\partial_z \varphi(z)\partial_z \varphi(z):\notag\\
     =& -\frac{1}{2}\sum_{m,n}:a_m a_n: z^{-m-n-2}
@@ -2137,14 +2145,14 @@ $w\sim w+l $という同一視をしている。
 L_n=& -\frac{1}{2}\sum_{m}:a_{n-m} a_m:\\
 L_0=& \sum_{m>0} a_{-m} a_m + \frac{1}{2} a_0^2
 \end{align}
-したがって、ハミルトニアン(\ref{hamiltonian})式はビラソロ代数の生成子を用いて次のように表すことが出来る。
+したがって、ハミルトニアン\eqref{hamiltonian}式はビラソロ代数の生成子を用いて次のように表すことが出来る。
 \begin{align}
     H=&\frac{2\pi}{l}(L_0 + \overline{L}_0)
 \end{align}
 この式から分かることは、円周$l$の円筒上に自由ボソンを配置したときのエネルギー固有値はビラソロ代数の生成子$L_0,\overline{L}_0$の固有値によって決定され、
 $\frac{2\pi}{l}$に比例しているということである。つまり、円筒上の自由ボソンを調べるにあたって、複素平面に移りビラソロ代数の生成子を用いて円筒上のことについて議論することが出来ると分かる。
 これが共形場理論における円筒-平面対応である。
-\\
+\blankline
 
 定義より、エネルギー運動量テンソルの真空期待値は$\ev{T(z)}=0$である。
 ここまでくると正規順序の定義が希薄になっているが
@@ -2155,7 +2163,7 @@ $\frac{2\pi}{l}$に比例しているということである。つまり、円�
 \therefore \ev{T(z)}=&\lim_{\epsilon \to 0}\qty[-\frac{1}{2}\qty(\ev{\partial_z \varphi(z)\partial_z \varphi(z+\epsilon)} + \frac{1}{\epsilon^2})]
 \end{align}
 この様に平面上でエネルギー運動量テンソルが0になるように理論を組み立てた時、有限の長さ$l$を持つ円周上ではどのように定義されるのかを見ていく。
-逆の変数変換$z\rightarrow w=\frac{l}{2\pi}\ln z$を使って(\ref{energy momentum trans})式に従って
+逆の変数変換$z\rightarrow w=\frac{l}{2\pi}\ln z$を使って\eqref{energy momentum trans}式に従って
 エネルギー運動量テンソルの変換を考える。
 \begin{align}
     T_{\text{cyl}}(w)=&\qty(\frac{dz}{dw})^{2}\qty[T_{\text{plane}}(z) + \frac{1}{12}S(z,w)]\\
@@ -2239,7 +2247,7 @@ $-\frac{2\pi}{l}\frac{1}{12}$だけずれることが分かる。これを有限
 \end{align}
 運動方程式から$\partial \bar{\psi}=0,\bar{\partial}\psi=0$が得られる。
 したがって、$\psi(z)$は正則、$\bar{\psi}(\bar{z})$は反正則な場であることが分かる。
-\\
+\blankline
 
 2点関数を計算する。
 フェルミオン場の2点関数を次のように置く。
@@ -2276,24 +2284,27 @@ $f=1/z$を採用することにより$\delta$関数の複素座標表示は次�
 \begin{align}
     \delta (z,\bar{z})=& \frac{1}{\pi }\bar{\partial} \qty(\frac{1}{z})=\frac{1}{\pi}\partial\qty(\frac{1}{\bar{z}})\label{deltacom}
 \end{align}
-これを用いることにより、(\ref{free fermion 2point})式は次のように書き直すことが出来る。
+これを用いることにより、\eqref{free fermion 2point}式は次のように書き直すことが出来る。
 \begin{align}
-    \frac{1}{2\pi}\begin{pmatrix}
+    &\frac{1}{2\pi}\begin{pmatrix}
         \partial_0 & 0 \\
         0& \partial_0
     \end{pmatrix}\begin{pmatrix}
         \ev{\psi(z,\bar{z})\psi(w,\bar{w})} & \ev{\psi(z,\bar{z})\bar{\psi}(w,\bar{w})} \\
         \ev{\bar{\psi}(z,\bar{z})\psi(w,\bar{w})} & \ev{\bar{\psi}(z,\bar{z})\bar{\psi}(w,\bar{w})}
-    \end{pmatrix}\nonumber\\+\frac{1}{2\pi}\begin{pmatrix}
+    \end{pmatrix}\nonumber\\
+    &+\frac{1}{2\pi}\begin{pmatrix}
          i\partial_1&0 \\
         0 & -i\partial_1
-    \end{pmatrix}&\begin{pmatrix}
+    \end{pmatrix}\begin{pmatrix}
         \ev{\psi(z,\bar{z})\psi(w,\bar{w})} & \ev{\psi(z,\bar{z})\bar{\psi}(w,\bar{w})} \\
         \ev{\bar{\psi}(z,\bar{z})\psi(w,\bar{w})} & \ev{\bar{\psi}(z,\bar{z})\bar{\psi}(w,\bar{w})}
     \end{pmatrix}\nonumber
-    \\=& \begin{pmatrix}
+    \\&= \begin{pmatrix}
         \delta(z-w,\bar{z}-\bar{w}) & 0 \\
-        0 & \delta(z-w,\bar{z}-\bar{w})\end{pmatrix}\\
+        0 & \delta(z-w,\bar{z}-\bar{w})\end{pmatrix}
+\end{align}
+\begin{align}
 \frac{1}{\pi}\begin{pmatrix}
     \bar{\partial}&0 \\
       0 & \partial
@@ -2345,20 +2356,22 @@ holomorphicな場のOPEは次のようになる。
     &\sim \frac{1}{2}\frac{\psi(w)}{(z-w)^2} + \frac{1}{z-w}\partial \psi(w)
 \end{align}
 したがって、一般のプライマリ場とエネルギー運動量テンソルとのOPEの形\eqref{OPE of T and phi }と一致し、その共形次元は$h=\frac{1}{2}$であることが分かる。
-\\
+\blankline
 
 次に中心電荷を求めるため、エネルギー運動量テンソル同士のOPEを計算する。場の交換は反可換であることに注意する。
 \begin{align}
     T(z)T(w)&=\frac{1}{4}:\psi(z)\partial \psi(z)::\psi(w)\partial \psi(w):\notag\\
-    &\sim \frac{1}{4}\contraction{}{\psi(z)}{\partial \psi(z)\psi(w)}{\partial\psi(w)}\contraction[2ex]{\psi(z)}{\partial \psi(z)}{}{\psi(w)} \psi(z)\partial \psi(z)\psi(w)\partial \psi(w) + \frac{1}{4}\contraction{}{\psi(z)}{\partial \psi(z)}{\psi(w)}\contraction[2ex]{\psi(z)}{\partial \psi(z)}{\psi(w)}{\partial \psi(w)}\psi(z)\partial \psi(z)\psi(w)\partial \psi(w)\nonumber
-    +\frac{1}{4}\contraction{}{\psi(z)}{\partial \psi(z)}{\psi(w)}\psi(z)\partial \psi(z)\psi(w)\partial \psi(w)\notag\\  &\ \ \ + \frac{1}{4}\contraction{}{\partial \psi(z)}{\partial \psi(z)\psi(z)}{\partial\psi(w)}\psi(z)\partial \psi(z)\psi(w)\partial \psi(w)+\frac{1}{4}\contraction{\psi(z)}{\partial\psi(z)}{}{\psi(w)}\psi(z)\partial\psi(z)\psi(w)\partial\psi(w)+\frac{1}{4}\contraction{\psi(z)}{\partial\psi(z)}{\psi(w)}{\partial\psi(w)}\psi(z)\partial\psi(z)\psi(w)\partial\psi(w)\notag\\
+    &\sim \frac{1}{4}\contraction{}{\psi(z)}{\partial \psi(z)\psi(w)}{\partial\psi(w)}\contraction[2ex]{\psi(z)}{\partial \psi(z)}{}{\psi(w)} \psi(z)\partial \psi(z)\psi(w)\partial \psi(w) \nonumber\\
+    &\ \ \ + \frac{1}{4}\contraction{}{\psi(z)}{\partial \psi(z)}{\psi(w)}\contraction[2ex]{\psi(z)}{\partial \psi(z)}{\psi(w)}{\partial \psi(w)}\psi(z)\partial \psi(z)\psi(w)\partial \psi(w)\nonumber
+    +\frac{1}{4}\contraction{}{\psi(z)}{\partial \psi(z)}{\psi(w)}\psi(z)\partial \psi(z)\psi(w)\partial \psi(w)\notag\\  &\ \ \ + \frac{1}{4}\contraction{}{\partial \psi(z)}{\partial \psi(z)\psi(z)}{\partial\psi(w)}\psi(z)\partial \psi(z)\psi(w)\partial \psi(w)\notag\\
+    &\ \ \ +\frac{1}{4}\contraction{\psi(z)}{\partial\psi(z)}{}{\psi(w)}\psi(z)\partial\psi(z)\psi(w)\partial\psi(w)+\frac{1}{4}\contraction{\psi(z)}{\partial\psi(z)}{\psi(w)}{\partial\psi(w)}\psi(z)\partial\psi(z)\psi(w)\partial\psi(w)\notag\\
     &= \frac{1}{4}\frac{1}{(z-w)^2}\frac{-1}{(z-w)^2} - \frac{1}{4}\frac{1}{z-w}\frac{-2}{(z-w)^3} - \frac{1}{4}\frac{1}{z-w}\partial \psi(z)\partial \psi(w) \nonumber\\
     &\ + \frac{1}{4}\frac{1}{(z-w)^2}\psi(z)\partial \psi(w)
     +\frac{1}{4}\frac{-1}{(z-w)^2}\psi(z)\partial\psi(w)-\frac{1}{4}\frac{-2}{(z-w)^3}\psi(z)\psi(w)\notag\\
     &\sim \frac{1/4}{(z-w)^4}+\frac{1}{(z-w)^2}2T(w) + \frac{1}{z-w}\partial T(w)
 \end{align}
 したがって、プライマリ場の運動量テンソル同士のOPEの形\eqref{OPE of T and T}と一致し、中心電荷は$c=\frac{1}{2}$であることが分かる。
-\\
+\blankline
 
 以上より、自由フェルミオン場は共形次元$h=\frac{1}{2}$、中心電荷$c=\frac{1}{2}$の共形場理論を構成することが分かる。
 \subsubsection{円筒-平面対応}
@@ -2418,7 +2431,7 @@ holomorphicな場のOPEは次のようになる。
     =& \frac{1}{2}\frac{\sqrt{z/w}+\sqrt{w/z}}{z-w}\label{R 2point}
 \end{align}
 $w\rightarrow z$ではR境界条件とNS境界条件の2点関数は同じ特異構造を持つが、離れた領域では2つに違いが出てくることに注意する。
-\\
+\blankline
 
 次に、円筒上でのエネルギー運動量テンソルの真空期待値を計算する。ここでは、境界条件が真空エネルギーに影響を与えることを確認する。
 エネルギー運動量テンソルは正規順序で次のように表される。
@@ -2455,7 +2468,7 @@ $k+k'=n$と変数を取り直すことに、次のようになる。
 \begin{align}
    T_{\text{plane}}(z)=\frac{1}{2}\sum_{k\in \mathbb{Z}+\nu, n\in\mathbb{Z}}\qty(k+\frac{1}{2})z^{-n-2}:b_{n-k}b_k:
 \end{align}
-\eqref{179}式により、ビラソロ代数の表式を求める。
+\eqref{Ln definition}式により、ビラソロ代数の表式を求める。
 \begin{align}
     L_n=& \oint \frac{dz}{2\pi i} z^{n+1} T_{\text{plane}}(z)\\
     =& \frac{1}{2}\sum_{k\in \mathbb{Z}+\nu}\qty(k+\frac{1}{2}):b_{n-k}b_k:
